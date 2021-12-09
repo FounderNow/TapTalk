@@ -1,26 +1,45 @@
 import styled from "styled-components";
 import InCall from "./components/InCall";
-import PreJoinRoom from "./components/PreJoinRoom";
+import CreateRoom from "./components/CreateRoom";
+import JoinRoom from "./components/JoinRoom";
 import theme from "./theme";
-import { SmallText } from "./components/shared/SmallText";
+// import { SmallText } from "./components/shared/SmallText";
 import { CallProvider, INCALL, PREJOIN, useCallState } from "./CallProvider";
-
 export const MOD = "MOD";
 export const SPEAKER = "SPK";
 export const LISTENER = "LST";
 
 const AppContent = () => {
   const { view } = useCallState();
+  let search = window.location.search;
+  let params = new URLSearchParams(search);
+  let isRoomId = false;
+  let joinRoomId = params.get("roomId");
+  if (joinRoomId) {
+    isRoomId = true;
+  }
+  console.log('view and isRoomId', isRoomId, joinRoomId, view);
   return (
     <AppContainer>
       <Wrapper>
         <Header>
           <HeaderTop>
-            <Title>TapTalk</Title>
+            <Title>
+              <LogoTextP1>Tap</LogoTextP1>
+              <LogoTextP2>Talk</LogoTextP2>
+            </Title>
+            {/* <Title>TapTalk</Title> */}
+            {view === INCALL && (
+              <CreateRoomButton>
+                Create a<br />
+                New Room
+              </CreateRoomButton>
+            )}
           </HeaderTop>
-          <SmallText>Your private audio room</SmallText>
+          <SubHeading>Your private audio room</SubHeading>
         </Header>
-        {view === PREJOIN && <PreJoinRoom />}
+        {view === PREJOIN && !isRoomId && <CreateRoom/>}
+        {view === PREJOIN && isRoomId && <JoinRoom roomId={joinRoomId} />}
         {view === INCALL && <InCall />}
       </Wrapper>
     </AppContainer>
@@ -64,7 +83,7 @@ const HeaderTop = styled.header`
 `;
 const Title = styled.h1`
   font-size: ${theme.fontSize.xxlarge};
-  color: ${theme.colors.blueDark};
+ 
   margin: 4px 0;
   font-weight: 600;
 `;
@@ -81,5 +100,34 @@ const Link = styled.a`
     max-width: ${(props) => (props.center ? "100%" : "400px")};
   }
 `;
+const CreateRoomButton = styled.button`
+  font-size: ${theme.fontSize.large};
+  color: ${theme.colors.turquoise};
+  margin: 4px 0;
+  font-weight: 600;
+  border: none !important;
+  background-color: ${theme.colors.greyLightest};
+`;
+const LogoTextP1 = styled.span`
+  font-family: ${theme.fontFamily.log} !important;
+  color: ${theme.colors.darkBlue} !important;
+  aspect-ratio: 2.5/1 !important;
+  font-weight: 600;
+`;
+const LogoTextP2 = styled.span`
+  font-family: ${theme.fontFamily.log} !important;
+  color: ${theme.colors.darkCayn} !important;
+  aspect-ratio: 2.5/1 !important;
+  font-weight: 600;
+`;
+const SubHeading = styled.p`
+  font-size: ${theme.fontSize.base};
+  color: ${theme.colors.sherpaBlue};
+  font-family: ${theme.fontFamily.subHeading};
+  font-weight: 400;
+  margin: ${(props) => props.margin || "12px 0"};
+  aspect-ratio: 1/1;
+`;
+
 
 export default App;

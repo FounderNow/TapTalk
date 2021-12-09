@@ -200,6 +200,9 @@ export const CallProvider = ({ children }) => {
       await callFrame.leave();
     }
     leave();
+    if (typeof window !== 'undefined') {
+      window.location.href = '/';
+ }
     setView(PREJOIN);
   }, [callFrame]);
 

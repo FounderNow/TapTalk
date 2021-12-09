@@ -4,23 +4,29 @@ import theme from "../theme";
 
 const CopyLinkBox = ({ room }) => {
   const [linkCopied, setLinkCopied] = useState(false);
+  
+  const currentURL = window.location.href // returns the absolute URL of a page
+
+  // const pathname = window.location.pathname
+  // console.log('history', pathname);
+  // console.log('currentURL,',currentURL)
   return (
     <Container>
       <InviteContainer>
-        <Header>Invite others</Header>
+        <Header>Invite Your Friends</Header>
         <SubHeader>
-          Copy and share join code with others to invite them. Code:{" "}
-          <Bold>{room?.name}</Bold>
+          Copy and share room link below.{" "}
+          {/* <Bold>{currentURL}{room?.name}</Bold> */}
         </SubHeader>
         <CopyButton
           onClick={() => {
-            navigator.clipboard.writeText(room?.name);
+            navigator.clipboard.writeText(`${currentURL}?roomId=${room?.name}`);
             setLinkCopied(true);
             setTimeout(() => setLinkCopied(false), 5000);
           }}
         >
           <CopyButtonText>
-            {linkCopied ? "Copied!" : `Copy join code`}
+            {linkCopied ? "Copied!" : `Copy join link`}
           </CopyButtonText>
         </CopyButton>
       </InviteContainer>
