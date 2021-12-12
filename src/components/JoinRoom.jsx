@@ -45,14 +45,15 @@ const JoinRoom = (props) => {
 
   return (
     <Container>
-      <Title>Getting started</Title>
+      <Title>Enter Your Name to Join</Title>
       <Form onSubmit={submitForm}>
-        <Label htmlFor="fname">First name (or nickname)</Label>
+        {/* <Label htmlFor="fname">First name (or nickname)</Label> */}
         <Input
           ref={firstNameRef}
           type="text"
           id="fname"
           name="fname"
+          placeholder="First name (or nickname)"
           required
         />
         {/* <Label htmlFor="room">Join code</Label> */}
@@ -83,7 +84,7 @@ const Container = styled.div`
   flex-direction: column;
   justify-content: center;
   height: 100%;
-  max-width: 400px;
+  max-width: 600px;
   margin-top: 48px;
 
   @media only screen and (min-width: 768px) {
@@ -118,7 +119,7 @@ const Input = styled.input`
   border-radius: 8px;
   border: ${theme.colors.grey} 1px solid;
   padding: 4px;
-  font-size: 16px;
+  font-size: 12px;
   line-height: 24px;
   margin-bottom: 4px;
 
@@ -129,7 +130,7 @@ const Input = styled.input`
 const Submit = styled(Input)`
   margin-top: 16px;
   border: ${theme.colors.cyanLight} 2px solid;
-  background-color: ${theme.colors.turquoise};
+  background-color: ${theme.colors.darkCyan};
   padding: 5px;
   font-size: ${theme.fontSize.base};
   font-weight: 600;

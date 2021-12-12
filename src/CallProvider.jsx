@@ -12,13 +12,14 @@ export const CallContext = createContext(null);
 
 export const PREJOIN = "pre-join";
 export const INCALL = "in-call";
+export const CREATEROOM = "create-room";
 const MSG_MAKE_MODERATOR = "make-moderator";
 const MSG_MAKE_SPEAKER = "make-speaker";
 const MSG_MAKE_LISTENER = "make-listener";
 const FORCE_EJECT = "force-eject";
 
 export const CallProvider = ({ children }) => {
-  const [view, setView] = useState(PREJOIN); // pre-join | in-call
+  const [view, setView] = useState(CREATEROOM); // create-room | pre-join | in-call
   const [callFrame, setCallFrame] = useState(null);
   const [participants, setParticipants] = useState([]);
   const [room, setRoom] = useState(null);
@@ -203,7 +204,7 @@ export const CallProvider = ({ children }) => {
     if (typeof window !== 'undefined') {
       window.location.href = '/';
  }
-    setView(PREJOIN);
+    setView(CREATEROOM);
   }, [callFrame]);
 
   const removeFromCall = useCallback(
@@ -221,6 +222,14 @@ export const CallProvider = ({ children }) => {
     },
     [callFrame]
   );
+
+  const createRoomCall = useCallback(() => {
+    setView(CREATEROOM)
+    if (typeof window !== 'undefined') {
+      window.location.href = '/';
+ }
+  }, []);
+
 
   const endCall = useCallback(() => {
     console.log("[ENDING CALL]");
@@ -464,9 +473,11 @@ export const CallProvider = ({ children }) => {
         joinRoom,
         leaveCall,
         endCall,
+        createRoomCall,
         removeFromCall,
         raiseHand,
         lowerHand,
+        setView,
         activeSpeakerId,
         error,
         participants,

@@ -78,8 +78,8 @@ const Container = styled.div`
   flex-direction: column;
   justify-content: center;
   height: 100%;
-  max-width: 400px;
-  margin-top: 48px;
+  max-width: 600px;
+  margin-top: auto;
 
   @media only screen and (min-width: 768px) {
     justify-content: flex-start;
@@ -124,10 +124,11 @@ const Input = styled.input`
 const Submit = styled(Input)`
   margin-top: 16px;
   border: ${theme.colors.cyanLight} 2px solid;
-  background-color: ${theme.colors.turquoise};
+  background-color: ${theme.colors.darkCyan};
   padding: 5px;
   font-size: ${theme.fontSize.base};
   font-weight: 600;
+  color: ${theme.colors.white};
   height: 36px;
   cursor: pointer;
 

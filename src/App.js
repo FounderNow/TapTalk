@@ -3,20 +3,20 @@ import InCall from "./components/InCall";
 import CreateRoom from "./components/CreateRoom";
 import JoinRoom from "./components/JoinRoom";
 import theme from "./theme";
-// import { SmallText } from "./components/shared/SmallText";
-import { CallProvider, INCALL, PREJOIN, useCallState } from "./CallProvider";
+import { useState } from "react";
+import { CallProvider, CREATEROOM, INCALL, PREJOIN, useCallState } from "./CallProvider";
 export const MOD = "MOD";
 export const SPEAKER = "SPK";
 export const LISTENER = "LST";
 
 const AppContent = () => {
-  const { view } = useCallState();
+  const { view, setView,createRoomCall } = useCallState();
   let search = window.location.search;
   let params = new URLSearchParams(search);
   let isRoomId = false;
   let joinRoomId = params.get("roomId");
-  if (joinRoomId) {
-    isRoomId = true;
+  if (joinRoomId && view !== INCALL) {
+    setView(PREJOIN)
   }
   console.log('view and isRoomId', isRoomId, joinRoomId, view);
   return (
@@ -24,22 +24,18 @@ const AppContent = () => {
       <Wrapper>
         <Header>
           <HeaderTop>
-            <Title>
-              <LogoTextP1>Tap</LogoTextP1>
-              <LogoTextP2>Talk</LogoTextP2>
-            </Title>
-            {/* <Title>TapTalk</Title> */}
+               <Logo src = '/TapTalk_Logo-removebg-preview.png' alt = ''/>
             {view === INCALL && (
-              <CreateRoomButton>
-                Create a<br />
-                New Room
+            <CreateRoomButton onClick={createRoomCall}>
+                Create a New Room
               </CreateRoomButton>
-            )}
+         )}  
           </HeaderTop>
-          <SubHeading>Your private audio room</SubHeading>
+          {/* <SubHeading>Your private audio room</SubHeading> */}
         </Header>
-        {view === PREJOIN && !isRoomId && <CreateRoom/>}
-        {view === PREJOIN && isRoomId && <JoinRoom roomId={joinRoomId} />}
+        {view === CREATEROOM  && <CreateRoom />}
+        {/* {isCreateRoom && <CreateRoom/>} */}
+        {view === PREJOIN && <JoinRoom roomId={joinRoomId} />}
         {view === INCALL && <InCall />}
       </Wrapper>
     </AppContainer>
@@ -70,7 +66,8 @@ const Wrapper = styled.div`
   margin: 0 auto;
 `;
 const Logo = styled.img`
-  height: 24px;
+  height: 88px;
+  margin-bottom: 2%;
 `;
 const Header = styled.header`
   display: flex;
@@ -83,7 +80,6 @@ const HeaderTop = styled.header`
 `;
 const Title = styled.h1`
   font-size: ${theme.fontSize.xxlarge};
- 
   margin: 4px 0;
   font-weight: 600;
 `;
@@ -102,31 +98,29 @@ const Link = styled.a`
 `;
 const CreateRoomButton = styled.button`
   font-size: ${theme.fontSize.large};
-  color: ${theme.colors.turquoise};
-  margin: 4px 0;
+  color: ${theme.colors.deepSkyBlue};
+  margin: 8px 0;
   font-weight: 600;
-  border: none !important;
   background-color: ${theme.colors.greyLightest};
+  border: 2px solid ${theme.colors.deepSkyBlue};
+  font-family: ${theme.fontFamily.subText};
+  border-radius: .75rem;
+  padding: .75rem;
+  cursor: pointer;
 `;
-const LogoTextP1 = styled.span`
+const LogoText = styled.span`
   font-family: ${theme.fontFamily.log} !important;
-  color: ${theme.colors.darkBlue} !important;
+  color: ${theme.colors.darkCyan} !important;
   aspect-ratio: 2.5/1 !important;
-  font-weight: 600;
-`;
-const LogoTextP2 = styled.span`
-  font-family: ${theme.fontFamily.log} !important;
-  color: ${theme.colors.darkCayn} !important;
-  aspect-ratio: 2.5/1 !important;
-  font-weight: 600;
+  font-weight: 800;
+  font-size: 44.2;
 `;
 const SubHeading = styled.p`
-  font-size: ${theme.fontSize.base};
-  color: ${theme.colors.sherpaBlue};
-  font-family: ${theme.fontFamily.subHeading};
-  font-weight: 400;
+  color: ${theme.colors.cyanShade};
+  font-family: ${theme.fontFamily.subText};
+  /* font-weight: 400; */
+  font-size: 14.9;
   margin: ${(props) => props.margin || "12px 0"};
-  aspect-ratio: 1/1;
 `;
 
 

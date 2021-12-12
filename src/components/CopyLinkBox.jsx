@@ -59,14 +59,14 @@ const Header = styled.h3`
 const SubHeader = styled.p`
   text-align: center;
   font-size: ${theme.fontSize.base};
-  color: ${theme.colors.blueDark};
+  color: ${theme.colors.black};
 `;
 const Bold = styled.span`
   font-weight: 600;
 `;
 const CopyButton = styled.button`
   border: ${theme.colors.cyanLight} 1px solid;
-  background-color: ${theme.colors.turquoise};
+  background-color: ${theme.colors.darkCyan};
   padding: 8px 12px;
   border-radius: 8px;
   width: 122px;
