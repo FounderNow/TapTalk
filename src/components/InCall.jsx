@@ -154,7 +154,7 @@ const TrayContent = styled.div`
   width: 100%;
 `;
 const Button = styled.button`
-  font-size: ${theme.fontSize.large};
+  /* font-size: ${theme.fontSize.large}; */
   font-weight: 600;
   border: none;
   background-color: transparent;

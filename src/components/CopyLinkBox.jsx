@@ -71,6 +71,7 @@ const CopyButton = styled.button`
   border-radius: 8px;
   width: 122px;
   cursor: pointer;
+  color: ${theme.colors.white}
 
   &:active {
     background-color: ${theme.colors.cyan};
@@ -85,6 +86,7 @@ const CopyButtonText = styled.span`
   font-size: ${theme.fontSize.base};
   font-weight: 600;
   text-align: center;
+  color: ${theme.colors.white}
 `;
 
 export default CopyLinkBox;
