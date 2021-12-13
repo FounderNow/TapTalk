@@ -31,11 +31,11 @@ const AppContent = () => {
         <Header>
           <HeaderTop>
             <Logo src="/TapTalk_Logo-removebg-preview.png" alt="" />
-            {/* {view === INCALL && ( */}
+            {view === INCALL && (
               <CreateRoomButton onClick={createRoomCall}>
-              <CreateRoomButtonText>Create a New Room</CreateRoomButtonText>  
+                <CreateRoomButtonText>Create a New Room</CreateRoomButtonText>
               </CreateRoomButton>
-            {/* )} */}
+            )}
           </HeaderTop>
           {/* <SubHeading>Your private audio room</SubHeading> */}
         </Header>
@@ -45,7 +45,7 @@ const AppContent = () => {
         {view === INCALL && <InCall />}
       </Wrapper>
       <Footer>
-        <Link>About Us</Link>
+        {/* <Link>About Us</Link> */}
         <CopyRight>Copyright © 2021 TapTalk</CopyRight>
       </Footer>
     </AppContainer>
@@ -99,7 +99,6 @@ const HeaderTop = styled.header`
     flex-direction: column;
     /* max-width: ${(props) => (props.center ? "100%" : "400px")}; */
   }
-  
 `;
 const Footer = styled.footer`
   display: flex;
@@ -134,11 +133,11 @@ const CreateRoomButton = styled.button`
   cursor: pointer;
 `;
 const CreateRoomButtonText = styled.span`
-color: ${theme.colors.deepSkyBlue};
-font-weight: 600;
-font-size: ${theme.fontSize.med};
-font-family: ${theme.fontFamily.subText};
-margin-left: 4px;
+  color: ${theme.colors.deepSkyBlue};
+  font-weight: 600;
+  font-size: ${theme.fontSize.med};
+  font-family: ${theme.fontFamily.subText};
+  margin-left: 4px;
 `;
 const LogoText = styled.span`
   font-family: ${theme.fontFamily.log} !important;
