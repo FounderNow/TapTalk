@@ -19,9 +19,15 @@ const theme = {
     red: "#e71115",
     redDark: "#bb0c0c",
     redLight: "#fddddd",
-    white: "#ffffff",
+    white: "white",
     turquoise: "#1bebb9",
     teal: "#14997a",
+    darkBlue: "#005170",
+    darkCyan: "#05ACEB",
+    sherpaBlue: "#013e54",
+    black: "#000000",
+    cyanShade: "#00658B",
+    deepSkyBlue : "#06B0EF"
   },
   fontSize: {
     small: "11px",
@@ -33,6 +39,9 @@ const theme = {
   },
   fontFamily: {
     regular: "Helvetica, Arial, sans-serif",
+    log: "Montserrat",
+    subHeading: "Roboto",
+    subText : "Aileron, Regular"
   },
 };
 

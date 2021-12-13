@@ -4,12 +4,11 @@ import { SPEAKER, MOD } from "../App";
 import theme from "../theme";
 import { useCallState } from "../CallProvider";
 
-const PreJoinRoom = () => {
+const JoinRoom = (props) => {
   const { joinRoom, error } = useCallState();
 
   const firstNameRef = useRef(null);
-  const roomNameRef = useRef(null);
-  const [roomName, setRoomName] = useState("");
+  // const [roomName, setRoomName] = useState("");
   const [submitting, setSubmitting] = useState(false);
 
   useEffect(() => {
@@ -17,72 +16,60 @@ const PreJoinRoom = () => {
       setSubmitting(false);
     }
   }, [error]);
-
-  const handleRoomChange = (e) => {
-    setRoomName(e?.target?.value);
-  };
-
   const submitForm = useCallback(
     (e) => {
       e.preventDefault();
       if (submitting) return;
       setSubmitting(true);
       if (
-        !firstNameRef?.current ||
-        !roomNameRef?.current
+        !firstNameRef?.current
       )
         return;
       let userName = `${firstNameRef?.current?.value}`;
 
       let name = "";
-      if (roomNameRef?.current?.value?.trim()) {
-        name = roomNameRef?.current?.value?.trim();
+      if (props?.roomId?.trim()) {
+        name = props?.roomId?.trim();
         /**
          * We track the account type but appending it to the username.
          * This is a quick solution for a demo; not a production-worthy solution!
          * You'd likely make a call to your server here to set the account type.
          */
         userName = `${userName?.trim()}_${SPEAKER}`;
-      } else {
-        /**
-         * If they're not submitting a specific room name, we'll create a new
-         * room in joinRoom() so let's make them the moderator by default.
-         */
-        userName = `${userName?.trim()}_${MOD}`;
+        joinRoom({ userName, name });
       }
-      joinRoom({ userName, name });
+     
     },
-    [firstNameRef, roomNameRef, joinRoom, submitting]
+    [firstNameRef, joinRoom, submitting]
   );
 
   return (
     <Container>
-      <Title>Getting started</Title>
+      <Title>Enter Your Name to Join</Title>
       <Form onSubmit={submitForm}>
-        <Label htmlFor="fname">First name (or nickname)</Label>
+        {/* <Label htmlFor="fname">First name (or nickname)</Label> */}
         <Input
           ref={firstNameRef}
           type="text"
           id="fname"
           name="fname"
+          placeholder="First name (or nickname)"
           required
         />
-        <Label htmlFor="room">Join code</Label>
-        <Input
+        {/* <Label htmlFor="room">Join code</Label> */}
+        {/* <Input
           ref={roomNameRef}
           type="text"
           id="room"
           name="room"
           onChange={handleRoomChange}
-        />
+        /> */}
         <Submit
           type="submit"
           value={
             submitting
               ? "Joining..."
-              : roomName?.trim()
-              ? "Join room"
-              : "Create and join room"
+              : "Join room"
           }
         />
         {error && <ErrorText>Error: {error.toString()}</ErrorText>}
@@ -97,7 +84,7 @@ const Container = styled.div`
   flex-direction: column;
   justify-content: center;
   height: 100%;
-  max-width: 400px;
+  max-width: 600px;
   margin-top: 48px;
 
   @media only screen and (min-width: 768px) {
@@ -132,7 +119,7 @@ const Input = styled.input`
   border-radius: 8px;
   border: ${theme.colors.grey} 1px solid;
   padding: 4px;
-  font-size: 16px;
+  font-size: 12px;
   line-height: 24px;
   margin-bottom: 4px;
 
@@ -143,7 +130,7 @@ const Input = styled.input`
 const Submit = styled(Input)`
   margin-top: 16px;
   border: ${theme.colors.cyanLight} 2px solid;
-  background-color: ${theme.colors.turquoise};
+  background-color: ${theme.colors.darkCyan};
   padding: 5px;
   font-size: ${theme.fontSize.base};
   font-weight: 600;
@@ -162,4 +149,4 @@ const ErrorText = styled.p`
   color: ${theme.colors.red};
 `;
 
-export default PreJoinRoom;
+export default JoinRoom;

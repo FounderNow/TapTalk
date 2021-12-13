@@ -72,7 +72,7 @@ const InCall = () => {
     <>
     <Container hidden={view !== INCALL}>
       <CallHeader>
-        <Header>Speakers</Header>
+          <Header>Speakers</Header>
       </CallHeader>
       {canSpeak}
       <CopyLinkBox room={room} />
