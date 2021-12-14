@@ -3,7 +3,6 @@ import InCall from "./components/InCall";
 import CreateRoom from "./components/CreateRoom";
 import JoinRoom from "./components/JoinRoom";
 import theme from "./theme";
-import { useState } from "react";
 import {
   CallProvider,
   CREATEROOM,

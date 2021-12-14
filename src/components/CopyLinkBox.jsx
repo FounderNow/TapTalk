@@ -1,15 +1,12 @@
 import { useState } from "react";
 import styled from "styled-components";
 import theme from "../theme";
+import copy from 'copy-to-clipboard';
 
 const CopyLinkBox = ({ room }) => {
   const [linkCopied, setLinkCopied] = useState(false);
   
   const currentURL = window.location.href // returns the absolute URL of a page
-
-  // const pathname = window.location.pathname
-  // console.log('history', pathname);
-  // console.log('currentURL,',currentURL)
   return (
     <Container>
       <InviteContainer>
@@ -20,7 +17,11 @@ const CopyLinkBox = ({ room }) => {
         </SubHeader>
         <CopyButton
           onClick={() => {
-            navigator.clipboard.writeText(`${currentURL}?roomId=${room?.name}`);
+            if (navigator?.clipboard?.writeText) {
+              navigator.clipboard.writeText(`${currentURL}?roomId=${room?.name}`);
+            } else {
+              copy(`${currentURL}?roomId=${room?.name}`)
+            }
             setLinkCopied(true);
             setTimeout(() => setLinkCopied(false), 5000);
           }}

@@ -58,14 +58,11 @@ const CreateRoom = () => {
           name="room"
           onChange={handleRoomChange}
         /> */}
-        <Submit
-          type="submit"
-          value={
+        <Submit>{
             submitting
               ? "Creating..."
               : "Create room"
-          }
-        />
+          }</Submit>
         {error && <ErrorText>Error: {error.toString()}</ErrorText>}
       </Form>
     </Container>
@@ -121,17 +118,17 @@ const Input = styled.input`
     outline: ${theme.colors.grey} auto 1px;
   }
 `;
-const Submit = styled(Input)`
+const Submit = styled.button`
   margin-top: 16px;
   border: ${theme.colors.cyanLight} 2px solid;
+  border-radius: 12px;
   background-color: ${theme.colors.darkCyan};
   padding: 5px;
   font-size: ${theme.fontSize.base};
   font-weight: 600;
-  color: ${theme.colors.white};
   height: 36px;
+  color: ${theme.colors.white};
   cursor: pointer;
-
   &:active {
     background-color: ${theme.colors.cyan};
   }

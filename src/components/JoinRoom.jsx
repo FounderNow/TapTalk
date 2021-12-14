@@ -64,14 +64,18 @@ const JoinRoom = (props) => {
           name="room"
           onChange={handleRoomChange}
         /> */}
-        <Submit
-          type="submit"
+        <Submit>{
+            submitting
+              ? "Joining..."
+              : "Join room"
+          }</Submit>
+          {/* type="submit"
           value={
             submitting
               ? "Joining..."
               : "Join room"
           }
-        />
+        /> */}
         {error && <ErrorText>Error: {error.toString()}</ErrorText>}
       </Form>
     </Container>
@@ -127,9 +131,10 @@ const Input = styled.input`
     outline: ${theme.colors.grey} auto 1px;
   }
 `;
-const Submit = styled(Input)`
+const Submit = styled.button`
   margin-top: 16px;
   border: ${theme.colors.cyanLight} 2px solid;
+  border-radius: 12px;
   background-color: ${theme.colors.darkCyan};
   padding: 5px;
   font-size: ${theme.fontSize.base};
@@ -137,7 +142,6 @@ const Submit = styled(Input)`
   height: 36px;
   color: ${theme.colors.white};
   cursor: pointer;
-
   &:active {
     background-color: ${theme.colors.cyan};
   }
