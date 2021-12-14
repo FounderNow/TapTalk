@@ -1,7 +1,7 @@
 import { useMemo, useCallback } from "react";
 import styled from "styled-components";
 import { INCALL, useCallState } from "../CallProvider";
-import { SPEAKER, LISTENER, MOD } from "../App";
+import { SPEAKER, MOD } from "../App";
 import CopyLinkBox from "./CopyLinkBox";
 import Participant from "./Participant";
 import Audio from "./Audio";
@@ -120,11 +120,6 @@ const CanSpeakContainer = styled.div`
   display: flex;
   flex-wrap: wrap;
 `;
-const ListeningContainer = styled.div`
-  margin-top: 24px;
-  display: flex;
-  flex-wrap: wrap;
-`;
 const Header = styled.h2`
   font-size: ${theme.fontSize.large};
   color: ${theme.colors.greyDark};
@@ -154,7 +149,6 @@ const TrayContent = styled.div`
   width: 100%;
 `;
 const Button = styled.button`
-  /* font-size: ${theme.fontSize.large}; */
   font-weight: 600;
   border: none;
   background-color: transparent;

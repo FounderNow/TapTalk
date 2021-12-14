@@ -1,4 +1,4 @@
-import React, {useRef, useCallback, useEffect} from "react";
+import React, {useRef, useEffect} from "react";
 
 export const AudioItem = ({participant}) => {
     const audioRef = useRef(null);

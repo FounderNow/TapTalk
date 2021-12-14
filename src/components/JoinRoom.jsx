@@ -1,6 +1,6 @@
 import { useCallback, useRef, useState, useEffect } from "react";
 import styled from "styled-components";
-import { SPEAKER, MOD } from "../App";
+import { SPEAKER } from "../App";
 import theme from "../theme";
 import { useCallState } from "../CallProvider";
 
@@ -8,7 +8,6 @@ const JoinRoom = (props) => {
   const { joinRoom, error } = useCallState();
 
   const firstNameRef = useRef(null);
-  // const [roomName, setRoomName] = useState("");
   const [submitting, setSubmitting] = useState(false);
 
   useEffect(() => {
@@ -40,6 +39,7 @@ const JoinRoom = (props) => {
       }
      
     },
+    // eslint-disable-next-line
     [firstNameRef, joinRoom, submitting]
   );
 
@@ -47,7 +47,6 @@ const JoinRoom = (props) => {
     <Container>
       <Title>Enter Your Name to Join</Title>
       <Form onSubmit={submitForm}>
-        {/* <Label htmlFor="fname">First name (or nickname)</Label> */}
         <Input
           ref={firstNameRef}
           type="text"
@@ -56,26 +55,12 @@ const JoinRoom = (props) => {
           placeholder="First name (or nickname)"
           required
         />
-        {/* <Label htmlFor="room">Join code</Label> */}
-        {/* <Input
-          ref={roomNameRef}
-          type="text"
-          id="room"
-          name="room"
-          onChange={handleRoomChange}
-        /> */}
         <Submit>{
             submitting
               ? "Joining..."
               : "Join room"
           }</Submit>
-          {/* type="submit"
-          value={
-            submitting
-              ? "Joining..."
-              : "Join room"
-          }
-        /> */}
+          
         {error && <ErrorText>Error: {error.toString()}</ErrorText>}
       </Form>
     </Container>
@@ -105,19 +90,6 @@ const Form = styled.form`
   flex-direction: column;
   margin: 0 0 24px;
   width: 100%;
-`;
-const SmallText = styled.p`
-  font-size: ${theme.fontSize.base};
-  color: ${theme.colors.greyDark};
-  margin: 2px 0;
-`;
-const Label = styled.label`
-  color: ${theme.colors.blueDark};
-  font-size: ${theme.fontSize.base};
-  margin-bottom: 4px;
-  line-height: 16px;
-  margin-top: 16px;
-  font-weight: 400;
 `;
 const Input = styled.input`
   border-radius: 8px;

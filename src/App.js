@@ -36,10 +36,8 @@ const AppContent = () => {
               </CreateRoomButton>
             )}
           </HeaderTop>
-          {/* <SubHeading>Your private audio room</SubHeading> */}
         </Header>
         {view === CREATEROOM && <CreateRoom />}
-        {/* {isCreateRoom && <CreateRoom/>} */}
         {view === PREJOIN && <JoinRoom roomId={joinRoomId} />}
         {view === INCALL && <InCall />}
       </Wrapper>
@@ -96,32 +94,12 @@ const HeaderTop = styled.header`
   @media only screen and (max-width: 480px) {
     justify-content: ${(props) => (props.center ? "center" : "flex-start")};
     flex-direction: column;
-    /* max-width: ${(props) => (props.center ? "100%" : "400px")}; */
   }
 `;
 const Footer = styled.footer`
   display: flex;
   flex-direction: column;
   align-items: center;
-`;
-const Title = styled.h1`
-  font-size: ${theme.fontSize.xxlarge};
-  margin: 4px 0;
-  font-weight: 600;
-`;
-const Link = styled.a`
-  font-weight: 400;
-  font-size: ${theme.fontSize.base};
-  color: ${theme.colors.darkCyan};
-  display: flex;
-  max-width: 400px;
-  font-weight: 600;
-  /* margin-bottom: 1px; */
-
-  @media only screen and (min-width: 768px) {
-    justify-content: ${(props) => (props.center ? "center" : "flex-start")};
-    max-width: ${(props) => (props.center ? "100%" : "400px")};
-  }
 `;
 const CreateRoomButton = styled.button`
   margin: 8px 0;
@@ -137,20 +115,6 @@ const CreateRoomButtonText = styled.span`
   font-size: ${theme.fontSize.med};
   font-family: ${theme.fontFamily.subText};
   margin-left: 4px;
-`;
-const LogoText = styled.span`
-  font-family: ${theme.fontFamily.log} !important;
-  color: ${theme.colors.darkCyan} !important;
-  aspect-ratio: 2.5/1 !important;
-  font-weight: 800;
-  font-size: 44.2;
-`;
-const SubHeading = styled.p`
-  color: ${theme.colors.cyanShade};
-  font-family: ${theme.fontFamily.subText};
-  /* font-weight: 400; */
-  font-size: 14.9;
-  margin: ${(props) => props.margin || "12px 0"};
 `;
 
 export default App;

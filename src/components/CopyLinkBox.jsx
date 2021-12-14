@@ -13,7 +13,6 @@ const CopyLinkBox = ({ room }) => {
         <Header>Invite Your Friends</Header>
         <SubHeader>
           Copy and share room link below.{" "}
-          {/* <Bold>{currentURL}{room?.name}</Bold> */}
         </SubHeader>
         <CopyButton
           onClick={() => {
@@ -61,9 +60,6 @@ const SubHeader = styled.p`
   text-align: center;
   font-size: ${theme.fontSize.base};
   color: ${theme.colors.black};
-`;
-const Bold = styled.span`
-  font-weight: 600;
 `;
 const CopyButton = styled.button`
   border: ${theme.colors.cyanLight} 1px solid;

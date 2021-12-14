@@ -1,6 +1,6 @@
 import { useCallback, useRef, useState, useEffect } from "react";
 import styled from "styled-components";
-import { SPEAKER, MOD } from "../App";
+import { MOD } from "../App";
 import theme from "../theme";
 import { useCallState } from "../CallProvider";
 
@@ -41,7 +41,6 @@ const CreateRoom = () => {
     <Container>
       <Title>Create a Private Audio Room</Title>
       <Form onSubmit={submitForm}>
-        {/* <Label htmlFor="fname">First name (or nickname)</Label> */}
         <Input
           ref={firstNameRef}
           type="text"
@@ -50,14 +49,6 @@ const CreateRoom = () => {
           placeholder="First name (or nickname)"
           required
         />
-        {/* <Label htmlFor="room">Join code</Label>
-        <Input
-          ref={roomNameRef}
-          type="text"
-          id="room"
-          name="room"
-          onChange={handleRoomChange}
-        /> */}
         <Submit>{
             submitting
               ? "Creating..."
@@ -93,19 +84,7 @@ const Form = styled.form`
   margin: 0 0 24px;
   width: 100%;
 `;
-const SmallText = styled.p`
-  font-size: ${theme.fontSize.base};
-  color: ${theme.colors.greyDark};
-  margin: 2px 0;
-`;
-const Label = styled.label`
-  color: ${theme.colors.blueDark};
-  font-size: ${theme.fontSize.base};
-  margin-bottom: 4px;
-  line-height: 16px;
-  margin-top: 16px;
-  font-weight: 400;
-`;
+
 const Input = styled.input`
   border-radius: 8px;
   border: ${theme.colors.grey} 1px solid;
