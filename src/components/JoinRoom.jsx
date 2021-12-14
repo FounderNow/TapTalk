@@ -135,6 +135,7 @@ const Submit = styled(Input)`
   font-size: ${theme.fontSize.base};
   font-weight: 600;
   height: 36px;
+  color: ${theme.colors.white};
   cursor: pointer;
 
   &:active {
