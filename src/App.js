@@ -105,6 +105,7 @@ const CreateRoomButton = styled.button`
   margin: 8px 0;
   background-color: ${theme.colors.greyLightest};
   border: 2px solid ${theme.colors.deepSkyBlue};
+  font-family: ${theme.fontFamily.regular};
   border-radius: 0.75rem;
   padding: 0.75rem;
   cursor: pointer;
