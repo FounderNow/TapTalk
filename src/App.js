@@ -18,12 +18,10 @@ const AppContent = () => {
   const { view, setView, createRoomCall } = useCallState();
   let search = window.location.search;
   let params = new URLSearchParams(search);
-  let isRoomId = false;
   let joinRoomId = params.get("roomId");
   if (joinRoomId && view !== INCALL) {
     setView(PREJOIN);
   }
-  console.log("view and isRoomId", isRoomId, joinRoomId, view);
   return (
     <AppContainer>
       <Wrapper>

@@ -27,6 +27,9 @@ export const CallProvider = ({ children }) => {
   const [roomExp, setRoomExp] = useState(null);
   const [activeSpeakerId, setActiveSpeakerId] = useState(null);
   const [updateParticipants, setUpdateParticipants] = useState(null);
+  const [chatHistory, setChatHistory] = useState([]);
+  const [sharedScreenUserId, setSharedScreenUserId] = useState([]);
+  const [isSharingScreen, setSharingScreen] = useState(false);
 
   const createRoom = async (roomName) => {
     if (roomName) return roomName;
@@ -201,9 +204,9 @@ export const CallProvider = ({ children }) => {
       await callFrame.leave();
     }
     leave();
-    if (typeof window !== 'undefined') {
-      window.location.href = '/';
- }
+    if (typeof window !== "undefined") {
+      window.location.href = "/";
+    }
     setView(CREATEROOM);
   }, [callFrame]);
 
@@ -224,12 +227,11 @@ export const CallProvider = ({ children }) => {
   );
 
   const createRoomCall = useCallback(() => {
-    setView(CREATEROOM)
-    if (typeof window !== 'undefined') {
-      window.location.href = '/';
- }
+    setView(CREATEROOM);
+    if (typeof window !== "undefined") {
+      window.location.href = "/";
+    }
   }, []);
-
 
   const endCall = useCallback(() => {
     console.log("[ENDING CALL]");
@@ -313,7 +315,14 @@ export const CallProvider = ({ children }) => {
     },
     [callFrame]
   );
-
+  const startScreenShare = () => {
+    if (!callFrame) return;
+    callFrame?.startScreenShare();
+  };
+  const stopScreenShare = () => {
+    if (!callFrame) return;
+    callFrame?.stopScreenShare();
+  };
   const changeAccountType = useCallback(
     (participant, accountType) => {
       if (!participant || ![MOD, SPEAKER, LISTENER].includes(accountType))
@@ -355,6 +364,44 @@ export const CallProvider = ({ children }) => {
     },
     [getAccountType, displayName, handleMute, callFrame]
   );
+  const sendMessage = useCallback(
+    ({ message }) => {
+      callFrame.sendAppMessage({ message: message }, "*");
+      const name = callFrame?.participants()?.local?.user_name
+        ? callFrame?.participants()?.local?.user_name
+        : "Guest";
+      console.log("chatHistory in send ===>", chatHistory);
+      setChatHistory((state) => [
+        ...state,
+        {
+          sender: name,
+          message: message,
+        },
+      ]);
+    },
+    [callFrame]
+  );
+  const receiveMessage = useCallback(
+    (event) => {
+      const participants = callFrame.participants();
+      console.log("chatHistory in recieve ===>", event.data);
+      const name = participants[event.fromId].user_name
+        ? participants[event.fromId].user_name
+        : "Guest";
+      setChatHistory(state=>[
+        ...state,
+        {
+          sender: name,
+          message: event.data.message,
+        },
+      ]);
+    },
+    [callFrame]
+  );
+
+  useEffect(() => {
+    console.log("Chat history updated:  ", chatHistory);
+  }, [chatHistory]);
 
   useEffect(() => {
     if (!callFrame) return;
@@ -405,7 +452,8 @@ export const CallProvider = ({ children }) => {
     callFrame.on("participant-joined", handleParticipantJoinedOrUpdated);
     callFrame.on("participant-updated", handleParticipantJoinedOrUpdated);
     callFrame.on("participant-left", handleParticipantLeft);
-    callFrame.on("app-message", handleAppMessage);
+    // callFrame.on("app-message", handleAppMessage);
+    callFrame.on("app-message", receiveMessage);
     callFrame.on("active-speaker-change", handleActiveSpeakerChange);
     callFrame.on("track-started", playTrack);
     callFrame.on("track-stopped", destroyTrack);
@@ -416,7 +464,8 @@ export const CallProvider = ({ children }) => {
       callFrame.off("participant-joined", handleParticipantJoinedOrUpdated);
       callFrame.off("participant-updated", handleParticipantJoinedOrUpdated);
       callFrame.off("participant-left", handleParticipantLeft);
-      callFrame.off("app-message", handleAppMessage);
+      // callFrame.off("app-message", handleAppMessage);
+      callFrame.off("app-message", receiveMessage);
       callFrame.off("active-speaker-change", handleActiveSpeakerChange);
       callFrame.off("track-started", playTrack);
       callFrame.off("track-stopped", destroyTrack);
@@ -478,12 +527,21 @@ export const CallProvider = ({ children }) => {
         raiseHand,
         lowerHand,
         setView,
+        receiveMessage,
         activeSpeakerId,
         error,
         participants,
         room,
         roomExp,
         view,
+        chatHistory,
+        sendMessage,
+        stopScreenShare,
+        startScreenShare,
+        setSharedScreenUserId,
+        sharedScreenUserId,
+        isSharingScreen,
+        setSharingScreen,
       }}
     >
       {children}
