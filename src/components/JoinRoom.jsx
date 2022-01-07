@@ -20,10 +20,7 @@ const JoinRoom = (props) => {
       e.preventDefault();
       if (submitting) return;
       setSubmitting(true);
-      if (
-        !firstNameRef?.current
-      )
-        return;
+      if (!firstNameRef?.current) return;
       let userName = `${firstNameRef?.current?.value}`;
 
       let name = "";
@@ -37,7 +34,6 @@ const JoinRoom = (props) => {
         userName = `${userName?.trim()}_${SPEAKER}`;
         joinRoom({ userName, name });
       }
-     
     },
     // eslint-disable-next-line
     [firstNameRef, joinRoom, submitting]
@@ -55,12 +51,8 @@ const JoinRoom = (props) => {
           placeholder="First name (or nickname)"
           required
         />
-        <Submit>{
-            submitting
-              ? "Joining..."
-              : "Join room"
-          }</Submit>
-          
+        <Submit>{submitting ? "Joining..." : "Join room"}</Submit>
+
         {error && <ErrorText>Error: {error.toString()}</ErrorText>}
       </Form>
     </Container>

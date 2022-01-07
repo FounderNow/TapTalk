@@ -8,7 +8,8 @@ const MutedIcon = ({ type = "default" }) => {
 };
 
 const Icon = styled.img`
-cursor: pointer;
-margin-left: 14px;`;
+  cursor: pointer;
+  margin-left: 14px;
+`;
 
 export default MutedIcon;

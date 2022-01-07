@@ -156,11 +156,17 @@ const InCall = () => {
               </LeaveButton>
             )}
             {mods?.length < 2 && getAccountType(local?.user_name) === MOD ? (
-              <LeaveButtonV2 type="submit" onClick={endCall} value="End Call"></LeaveButtonV2>
+              <LeaveButtonV2
+                type="submit"
+                onClick={endCall}
+                value="End Call"
+              ></LeaveButtonV2>
             ) : (
-              // <button style={{height:"30px"}}> testas jahs k</button>
-              <LeaveButtonV2 type="submit" onClick={leaveCall} value="Leave call"></LeaveButtonV2>
-              // <LeaveButtonV2 onClick={leaveCall}>Leave call</LeaveButtonV2>
+              <LeaveButtonV2
+                type="submit"
+                onClick={leaveCall}
+                value="Leave call"
+              ></LeaveButtonV2>
             )}
           </TrayContent>
         </Tray>
@@ -271,15 +277,15 @@ const LeaveButtonV2 = styled.input`
   padding-left: 20px;
   padding-right: 20px;
   color: ${theme.colors.white};
-  font-size:14px;
-  font-weight:600;
+  font-size: 14px;
+  font-weight: 600;
   border-radius: 10px 10px 10px 10px;
   background-color: ${theme.colors.red};
-  @media (max-width:480px){
-  padding-left: 6px;
-  padding-right: 6px;
-  font-size:10px;
-  font-weight:600;
+  @media (max-width: 480px) {
+    padding-left: 6px;
+    padding-right: 6px;
+    font-size: 10px;
+    font-weight: 600;
   }
   /* margin-left: auto;
   align-items: center;

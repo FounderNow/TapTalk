@@ -21,21 +21,18 @@ const CreateRoom = () => {
       e.preventDefault();
       if (submitting) return;
       setSubmitting(true);
-      if (
-        !firstNameRef?.current
-      )
-        return;
+      if (!firstNameRef?.current) return;
       let userName = `${firstNameRef?.current?.value}`;
       let name = "";
-        /**
-         * If they're not submitting a specific room name, we'll create a new
-         * room in joinRoom() so let's make them the moderator by default.
-         */
-        userName = `${userName?.trim()}_${MOD}`;
+      /**
+       * If they're not submitting a specific room name, we'll create a new
+       * room in joinRoom() so let's make them the moderator by default.
+       */
+      userName = `${userName?.trim()}_${MOD}`;
       joinRoom({ userName, name });
     },
     [firstNameRef, joinRoom, submitting]
-  );  
+  );
 
   return (
     <Container>
@@ -49,11 +46,7 @@ const CreateRoom = () => {
           placeholder="First name (or nickname)"
           required
         />
-        <Submit>{
-            submitting
-              ? "Creating..."
-              : "Create room"
-          }</Submit>
+        <Submit>{submitting ? "Creating..." : "Create room"}</Submit>
         {error && <ErrorText>Error: {error.toString()}</ErrorText>}
       </Form>
     </Container>

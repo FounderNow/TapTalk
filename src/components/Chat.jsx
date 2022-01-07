@@ -9,7 +9,7 @@ const Chat = (props) => {
   const [inputValue, setInputValue] = useState("");
   // const [chatHistory, setChatHistory] = useState([]);
   const { chatHistory, sendMessage } = useCallState();
-  const [onView, setonView] = useState('Chat')
+  const [onView, setonView] = useState("Chat");
   const messagesRef = useRef(null);
   const handleChange = (event) => {
     setInputValue(event.target.value);
@@ -76,57 +76,62 @@ const Chat = (props) => {
     <ChatRoom>
       <ChatHistory>
         <ChatHeadingList>
-          <HeadingItem onClick= {()=>setonView('Participant')}>
-            People {onView === 'Participant' && <Hr></Hr>}
+          <HeadingItem onClick={() => setonView("Participant")}>
+            People {onView === "Participant" && <Hr></Hr>}
           </HeadingItem>
-          <HeadingItem onClick= {()=>setonView('Chat')}>Chat {onView === 'Chat' && <Hr></Hr>}</HeadingItem>
+          <HeadingItem onClick={() => setonView("Chat")}>
+            Chat {onView === "Chat" && <Hr></Hr>}
+          </HeadingItem>
           <HeadingItem onClick={() => props.setChatDisplay(false)}>
             X
           </HeadingItem>
         </ChatHeadingList>
         <MainHr></MainHr>
-        {onView === 'Chat' && <MessagesList>
-          {chatHistory.map((entry, index) => (
-            <>
-              <MessageList key={`entry-${index}`}>
-                {entry?.type === 1 ? (
-                  <Message> {entry.message}</Message>
-                ) : (
-                  <VisitorMessage> {entry.message}</VisitorMessage>
-                )}
-                <MessageSender>{entry.sender}</MessageSender>
-              </MessageList>
-            </>
-          ))}
-          <div ref={messagesRef} id="#scollection"></div>
-          
-        </MessagesList>
-        }
-        {onView === 'Participant' && <>{props?.participants?.map((item) => (
-          <PartcipentsList>
-            <Participant key={item.user_id}>{item.user_name}</Participant>
-          </PartcipentsList>
-         
-        ))}
-        </>}
-        
-        {onView === 'Chat' && <>
-        <form onSubmit={handleSubmit}>
-          {/* <label htmlFor="chatInput"></label> */}
-          <ChatInput
-            id="chatInput"
-            className="chat-input"
-            type="text"
-            placeholder="Type your message here.."
-            value={inputValue}
-            onChange={handleChange}
-          ></ChatInput>
-          <SendChatButton onClick={handleSubmit}>{">>"}</SendChatButton>
-        </form>
-
-          <FooterManu> Download chat(.txt)</FooterManu>
+        {onView === "Chat" && (
+          <MessagesList>
+            {chatHistory.map((entry, index) => (
+              <>
+                <MessageList key={`entry-${index}`}>
+                  {entry?.type === 1 ? (
+                    <Message> {entry.message}</Message>
+                  ) : (
+                    <VisitorMessage> {entry.message}</VisitorMessage>
+                  )}
+                  <MessageSender>{entry.sender}</MessageSender>
+                </MessageList>
+              </>
+            ))}
+            <div ref={messagesRef} id="#scollection"></div>
+          </MessagesList>
+        )}
+        {onView === "Participant" && (
+          <>
+            {props?.participants?.map((item) => (
+              <PartcipentsList>
+                <Participant key={item.user_id}>{item.user_name}</Participant>
+              </PartcipentsList>
+            ))}
           </>
-        }
+        )}
+
+        {onView === "Chat" && (
+          <>
+            <form onSubmit={handleSubmit}>
+              {/* <label htmlFor="chatInput"></label> */}
+              <ChatInput
+                id="chatInput"
+                className="chat-input"
+                type="text"
+                placeholder="Type your message here.."
+                value={inputValue}
+                onChange={handleChange}
+              ></ChatInput>
+              <SendChatButton onClick={handleSubmit}>{">>"}</SendChatButton>
+            </form>
+
+            <FooterManu> Download chat(.txt)</FooterManu>
+          </>
+        )}
       </ChatHistory>
     </ChatRoom>
   ) : null;
@@ -174,7 +179,7 @@ const MessagesList = styled.div`
   border-radius: 4px;
   overflow: scroll;
   @media (max-height: 650px) {
-    height: 300px
+    height: 300px;
   }
 `;
 const HeadingItem = styled.li`
@@ -236,7 +241,7 @@ const ChatHistory = styled.div`
   background-color: #ffffff;
   border-radius: 4px;
   @media (max-height: 650px) {
-    height: 400px
+    height: 400px;
   }
   /* border-style: groove; */
 `;
