@@ -7,6 +7,8 @@ const MutedIcon = ({ type = "default" }) => {
   return <Icon src={src} />;
 };
 
-const Icon = styled.img``;
+const Icon = styled.img`
+cursor: pointer;
+margin-left: 14px;`;
 
 export default MutedIcon;

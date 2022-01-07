@@ -376,6 +376,7 @@ export const CallProvider = ({ children }) => {
         {
           sender: name,
           message: message,
+          type : 1 //1 => self message 2: visitor message
         },
       ]);
     },
@@ -393,6 +394,7 @@ export const CallProvider = ({ children }) => {
         {
           sender: name,
           message: event.data.message,
+          type : 2 //1 => self message 2: visitor message
         },
       ]);
     },

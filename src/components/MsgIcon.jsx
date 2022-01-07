@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import msg from "../icons/msg.svg";
+import msg from "../icons/message.svg";
 
 const MsgIcon = ({ type = "default", highlighted= false }) => {
 
@@ -10,6 +10,7 @@ const MsgIcon = ({ type = "default", highlighted= false }) => {
 
 const Icon = styled.img`{
 cursor: pointer;
+padding-bottom: 4px;
 }
 `;
 

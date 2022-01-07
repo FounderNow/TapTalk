@@ -7,6 +7,8 @@ const MicIcon = ({ type = "default" }) => {
   return <Icon src={src} />;
 };
 
-const Icon = styled.img``;
+const Icon = styled.img`
+margin-left: 4px;
+`;
 
 export default MicIcon;
