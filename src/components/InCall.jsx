@@ -105,7 +105,7 @@ const InCall = () => {
       {console.log(local, "local")}
       <Container hidden={view !== INCALL}>
         <CallHeader>
-          <Header>Speakers</Header>
+          <Header></Header>
         </CallHeader>
         {isSharingScreen && (
           <>
@@ -152,7 +152,7 @@ const InCall = () => {
                 onClick={toggleSharingScreen}
               >
                 <ShareScreenIcon />
-                ScreenSharing
+                Share Screen
               </LeaveButton>
             )}
             {mods?.length < 2 && getAccountType(local?.user_name) === MOD ? (
@@ -286,6 +286,9 @@ const LeaveButtonV2 = styled.input`
     padding-right: 6px;
     font-size: 10px;
     font-weight: 600;
+  }
+  &:hover {
+    cursor: pointer;
   }
   /* margin-left: auto;
   align-items: center;

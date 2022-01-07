@@ -11,7 +11,8 @@ const Icon = styled.img`
   height: 60%;
   width: 40%;
   padding-left: 20px;
-  padding-bottom: 1px;
+  padding-bottom: 3px;
+  margin-top: -2px;
 `;
 
 export default ShareScreenIcon;

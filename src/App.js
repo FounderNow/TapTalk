@@ -27,7 +27,7 @@ const AppContent = () => {
       <Wrapper>
         <Header>
           <HeaderTop>
-            <Logo src="/TapTalk_Logo-removebg-preview.png" alt="" />
+            <Logo src="/taptalk_logo-croped.png" alt="" />
             {view === INCALL && (
               <CreateRoomButton onClick={createRoomCall}>
                 <CreateRoomButtonText>Create a New Room</CreateRoomButtonText>
@@ -37,11 +37,11 @@ const AppContent = () => {
         </Header>
         {view === CREATEROOM && <CreateRoom />}
         {view === PREJOIN && <JoinRoom roomId={joinRoomId} />}
-        {view === INCALL && <InCall />}
+        {view === INCALL && <InCall />} 
       </Wrapper>
       <Footer>
         {/* <Link>About Us</Link> */}
-        <CopyRight>Copyright © 2021 TapTalk</CopyRight>
+        {view !== INCALL &&<CopyRight>Copyright © 2021 TapTalk</CopyRight>}
       </Footer>
     </AppContainer>
   );

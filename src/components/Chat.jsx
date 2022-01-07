@@ -8,7 +8,7 @@ const Chat = (props) => {
   // const callObject = useContext(CallObjectContext);
   const [inputValue, setInputValue] = useState("");
   // const [chatHistory, setChatHistory] = useState([]);
-  const { chatHistory, sendMessage } = useCallState();
+  const { chatHistory, sendMessage ,displayName} = useCallState();
   const [onView, setonView] = useState("Chat");
   const messagesRef = useRef(null);
   const handleChange = (event) => {
@@ -97,7 +97,7 @@ const Chat = (props) => {
                   ) : (
                     <VisitorMessage> {entry.message}</VisitorMessage>
                   )}
-                  <MessageSender>{entry.sender}</MessageSender>
+                  <MessageSender>{displayName(entry.sender)}</MessageSender>
                 </MessageList>
               </>
             ))}
@@ -108,7 +108,7 @@ const Chat = (props) => {
           <>
             {props?.participants?.map((item) => (
               <PartcipentsList>
-                <Participant key={item.user_id}>{item.user_name}</Participant>
+                <Participant key={item.user_id}>{displayName(item.user_name)}</Participant>
               </PartcipentsList>
             ))}
           </>
@@ -129,7 +129,7 @@ const Chat = (props) => {
               <SendChatButton onClick={handleSubmit}>{">>"}</SendChatButton>
             </form>
 
-            <FooterManu> Download chat(.txt)</FooterManu>
+            {/* <FooterManu> Download chat(.txt)</FooterManu> */}
           </>
         )}
       </ChatHistory>
