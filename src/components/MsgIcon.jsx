@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import msg from "../icons/message.svg";
+import msg from "../icons/chat-icon.svg";
 
 const MsgIcon = ({ type = "default", highlighted = false }) => {
   // const src = type === "default" ? mic : simple;

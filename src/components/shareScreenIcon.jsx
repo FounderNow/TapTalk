@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import shareScreen from "../icons/shareScreen.svg";
+import shareScreen from "../icons/shareScreen-icon.svg";
 
 const ShareScreenIcon = ({ type = "default", highlighted = false }) => {
   // const src = type === "default" ? mic : simple;
@@ -8,9 +8,9 @@ const ShareScreenIcon = ({ type = "default", highlighted = false }) => {
 
 const Icon = styled.img`
   cursor: pointer;
-  height: 60%;
+  /* height: 60%;
   width: 40%;
-  padding-bottom: 5px;
+  padding-bottom: 5px; */
 `;
 
 export default ShareScreenIcon;

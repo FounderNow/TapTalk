@@ -317,7 +317,7 @@ const AudioButton = styled(Button)`
   } */
 `;
 const ButtonText = styled.span`
-  margin-left: 4px;
+  /* margin-left: 4px; */
   font-family: ${theme.fontFamily.regular};
   font-weight: 400;
   font-size: ${theme.fontSize.med};
