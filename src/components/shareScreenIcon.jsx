@@ -1,9 +1,11 @@
 import styled from "styled-components";
 import shareScreen from "../icons/shareScreen-icon.svg";
+import shareScreenHighlight from "../icons/shareScreen-icon-highlight.svg";
 
-const ShareScreenIcon = ({ type = "default", highlighted = false }) => {
-  // const src = type === "default" ? mic : simple;
-  return <Icon src={shareScreen} />;
+const ShareScreenIcon = ({ highlighted = false }) => {
+  console.log('height: ', highlighted)
+  const src = highlighted === true ? shareScreenHighlight : shareScreen;
+  return <Icon src={src} />;
 };
 
 const Icon = styled.img`

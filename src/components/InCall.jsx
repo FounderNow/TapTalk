@@ -32,6 +32,7 @@ const InCall = () => {
   let screenSharingParticipant;
   const [displayChat, setChatDisplay] = useState(false);
   const [highlightedChat, setChatHighlight] = useState(false);
+  const [highlightSharingScreen, setShareScreenHighlight] = useState(false);
   const [isSharingScreen, setSharingScreen] = useState(false);
   const local = useMemo(
     (p) => participants?.filter((p) => p?.local)[0],
@@ -39,9 +40,9 @@ const InCall = () => {
   );
   const toggleChat = () => {
     setChatDisplay(!displayChat);
-    if (highlightedChat) {
+    // if (highlightedChat) {
       setChatHighlight(!highlightedChat);
-    }
+    // }
   };
   const mods = useMemo(
     () =>
@@ -77,6 +78,7 @@ const InCall = () => {
     isSharingScreen ? stopScreenShare() : startScreenShare();
     isVideoTrue();
     // setSharingScreen(!isSharingScreen);
+    setShareScreenHighlight(!highlightSharingScreen)
   };
   const handleAudioChange = useCallback(
     () => (local?.audio ? handleMute(local) : handleUnmute(local)),
@@ -143,7 +145,7 @@ const InCall = () => {
               participants={[...mods, ...speakers]}
             />
             <LeaveButton onClick={toggleChat} highlighted={highlightedChat}>
-              <MsgIcon />
+              <MsgIcon highlighted= {highlightedChat} />
               <ButtonText>Chat</ButtonText>
             </LeaveButton>
             {DailyIframe.supportedBrowser().supportsScreenShare && (
@@ -151,7 +153,7 @@ const InCall = () => {
                 highlighted={isSharingScreen}
                 onClick={toggleSharingScreen}
               >
-                <ShareScreenIcon />
+                <ShareScreenIcon highlighted= {highlightSharingScreen}/>
                 <ButtonText>Share Screen</ButtonText>
               </LeaveButton>
             )}
