@@ -301,7 +301,7 @@ const LeaveButtonV2 = styled.input`
   color: ${theme.colors.white} */
 `;
 const HandButton = styled(Button)`
-  margin-right: auto;
+  /* margin-right: auto; */
 `;
 const AudioButton = styled(Button)`
   /* margin-right: auto; */
