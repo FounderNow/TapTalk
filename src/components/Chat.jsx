@@ -76,9 +76,10 @@ const Chat = (props) => {
     <ChatRoom>
       <ChatHistory>
         <ChatHeadingList>
-          <HeadingItem onClick={() => setonView("Participant")}>
+          {/* people working on chat tab */}
+          {/* <HeadingItem onClick={() => setonView("Participant")}>
             People {onView === "Participant" && <Hr></Hr>}
-          </HeadingItem>
+          </HeadingItem> */}
           <HeadingItem onClick={() => setonView("Chat")}>
             Chat {onView === "Chat" && <Hr></Hr>}
           </HeadingItem>
@@ -104,7 +105,7 @@ const Chat = (props) => {
             <div ref={messagesRef} id="#scollection"></div>
           </MessagesList>
         )}
-        {onView === "Participant" && (
+        {/* {onView === "Participant" && (
           <>
             {props?.participants?.map((item) => (
               <PartcipentsList>
@@ -112,7 +113,7 @@ const Chat = (props) => {
               </PartcipentsList>
             ))}
           </>
-        )}
+        )} */}
 
         {onView === "Chat" && (
           <>

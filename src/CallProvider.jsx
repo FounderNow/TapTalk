@@ -454,7 +454,7 @@ export const CallProvider = ({ children }) => {
     callFrame.on("participant-joined", handleParticipantJoinedOrUpdated);
     callFrame.on("participant-updated", handleParticipantJoinedOrUpdated);
     callFrame.on("participant-left", handleParticipantLeft);
-    // callFrame.on("app-message", handleAppMessage);
+    callFrame.on("app-message", handleAppMessage);
     callFrame.on("app-message", receiveMessage);
     callFrame.on("active-speaker-change", handleActiveSpeakerChange);
     callFrame.on("track-started", playTrack);

@@ -10,9 +10,7 @@ const Icon = styled.img`
   cursor: pointer;
   height: 60%;
   width: 40%;
-  padding-left: 20px;
-  padding-bottom: 3px;
-  margin-top: -2px;
+  padding-bottom: 5px;
 `;
 
 export default ShareScreenIcon;

@@ -37,11 +37,11 @@ const AppContent = () => {
         </Header>
         {view === CREATEROOM && <CreateRoom />}
         {view === PREJOIN && <JoinRoom roomId={joinRoomId} />}
-        {view === INCALL && <InCall />} 
+        {view === INCALL && <InCall />}
       </Wrapper>
       <Footer>
         {/* <Link>About Us</Link> */}
-        {view !== INCALL &&<CopyRight>Copyright © 2021 TapTalk</CopyRight>}
+        {view !== INCALL && <CopyRight>Copyright © 2021 TapTalk</CopyRight>}
       </Footer>
     </AppContainer>
   );
@@ -78,8 +78,8 @@ const CopyRight = styled.span`
   font-weight: 400;
 `;
 const Logo = styled.img`
-  height: 88px;
-  margin-bottom: 2%;
+  height: 60px;
+  margin-bottom: 0%;
 `;
 const Header = styled.header`
   display: flex;

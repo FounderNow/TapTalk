@@ -121,10 +121,10 @@ const InCall = () => {
             {[MOD, SPEAKER].includes(getAccountType(local?.user_name)) ? (
               <AudioButton onClick={handleAudioChange}>
                 {local?.audio ? (
-                  <MicIcon type="simple" style={true} />
-                ) : (
-                  <MutedIcon type="simple" style={true} />
-                )}
+                <MicIcon type="simple" style={true} />
+                 ) : ( 
+                   <MutedIcon type="simple" style={true} /> 
+                 )} 
                 <ButtonText>{local?.audio ? "Mute" : "Unmute"}</ButtonText>
               </AudioButton>
             ) : (
@@ -152,7 +152,7 @@ const InCall = () => {
                 onClick={toggleSharingScreen}
               >
                 <ShareScreenIcon />
-                Share Screen
+                <ButtonText>Share Screen</ButtonText>
               </LeaveButton>
             )}
             {mods?.length < 2 && getAccountType(local?.user_name) === MOD ? (
@@ -165,7 +165,7 @@ const InCall = () => {
               <LeaveButtonV2
                 type="submit"
                 onClick={leaveCall}
-                value="Leave call"
+                value="Leave"
               ></LeaveButtonV2>
             )}
           </TrayContent>
@@ -219,11 +219,11 @@ const Tray = styled.div`
   position: fixed;
   bottom: 0;
   left: 0;
-  height: 72px;
+  height: 80px;
   width: 100vw;
   box-sizing: border-box;
   background-color: ${theme.colors.greyLight};
-  padding: 12px;
+  padding-top: 10px;
 `;
 const TrayContent = styled.div`
   /* max-width: 600px; */
@@ -259,7 +259,8 @@ const LeaveButton = styled(Button)`
   display: flex;
   /* align-items: center; */
   flex-direction: column;
-  justify-content: start;
+  align-items: center;
+  /* justify-content: start; */
   /* margin-left: auto;
   display: flex;
   align-items: center;
@@ -278,9 +279,11 @@ const LeaveButtonV2 = styled.input`
   padding-right: 20px;
   color: ${theme.colors.white};
   font-size: 14px;
-  font-weight: 600;
+  font-weight: 400;
   border-radius: 10px 10px 10px 10px;
   background-color: ${theme.colors.red};
+  font-family: ${theme.fontFamily.regular};
+  border: none;
   @media (max-width: 480px) {
     padding-left: 6px;
     padding-right: 6px;
@@ -305,13 +308,21 @@ const AudioButton = styled(Button)`
   display: flex;
   /* align-items: center; */
   flex-direction: column;
-  justify-content: start;
+  align-items: center;
+  justify-content: center;
+  min-width: 70px;
+  /* margin-top: auto; */
   /* &:nth-child(1){
     padding-left: 4px;
   } */
 `;
 const ButtonText = styled.span`
   margin-left: 4px;
+  font-family: ${theme.fontFamily.regular};
+  font-weight: 400;
+  font-size: ${theme.fontSize.med};
+  margin-top: auto;
+  /* color : ${theme.colors.turquoise}; */
 `;
 
 export default InCall;
