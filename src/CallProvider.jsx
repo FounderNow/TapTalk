@@ -230,7 +230,7 @@ export const CallProvider = ({ children }) => {
   const createRoomCall = useCallback(() => {
     setView(CREATEROOM);
     if (typeof window !== "undefined") {
-      window.location.href = "/";
+      window.open (window.location.origin);
     }
   }, []);
 

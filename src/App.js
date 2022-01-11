@@ -29,7 +29,7 @@ const AppContent = () => {
           <HeaderTop>
             <Logo src="/taptalk_logo-croped.png" alt="" />
             {view === INCALL && (
-              <CreateRoomButton onClick={createRoomCall}>
+              <CreateRoomButton onClick={()=> window.open (window.location.origin)}>
                 <CreateRoomButtonText>Create a New Room</CreateRoomButtonText>
               </CreateRoomButton>
             )}
