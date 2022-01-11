@@ -110,8 +110,8 @@ const CreateRoomButton = styled.button`
 `;
 const CreateRoomButtonText = styled.span`
   color: ${theme.colors.deepSkyBlue};
-  font-weight: 400;
-  font-size: ${theme.fontSize.med};
+  font-weight: 500;
+  font-size: ${theme.fontSize.base};
   font-family: ${theme.fontFamily.regular};
   margin-left: 4px;
 `;
