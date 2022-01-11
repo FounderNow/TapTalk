@@ -8,7 +8,7 @@ const MicIcon = ({ type = "default" }) => {
 };
 
 const Icon = styled.img`
-  /* margin-left: 4px; */
+  margin-bottom: 2px;
 `;
 
 export default MicIcon;

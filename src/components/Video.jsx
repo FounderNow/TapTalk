@@ -33,9 +33,7 @@ export const VideoItem = ({ participant }) => {
       id={`video-${participant?.user_id}`}
       ref={videoRef}
       style={{
-        width: "700px",
-        height: "600px",
-        margin: 0,
+        width: "100%",
       }}
     />
   );

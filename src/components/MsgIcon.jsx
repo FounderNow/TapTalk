@@ -11,7 +11,7 @@ const MsgIcon = ({ highlighted = false }) => {
 const Icon = styled.img`
    {
     cursor: pointer;
-    /* padding-bottom: 4px; */
+    padding-bottom: 4px;
   }
 `;
 

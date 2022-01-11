@@ -249,7 +249,7 @@ const Participant = ({ participant, local, modCount }) => {
       <Name>{name}</Name>
       {getAccountType(participant?.user_name) !== LISTENER && (
         <AudioIcon>
-          {participant?.audio ? <MicIcon /> : <MutedIcon />}
+          {participant?.audio ? <MicIcon  style={true}/> : <MutedIcon  style={true}/>}
         </AudioIcon>
       )}
       {showMoreMenu && menuOptions.length > 0 && (

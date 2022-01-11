@@ -27,12 +27,13 @@ const InCall = () => {
     lowerHand,
     endCall,
     stopScreenShare,
+    highlightSharingScreen,
     startScreenShare,
   } = useCallState();
   let screenSharingParticipant;
   const [displayChat, setChatDisplay] = useState(false);
   const [highlightedChat, setChatHighlight] = useState(false);
-  const [highlightSharingScreen, setShareScreenHighlight] = useState(false);
+  // const [highlightSharingScreen, setShareScreenHighlight] = useState(false);
   const [isSharingScreen, setSharingScreen] = useState(false);
   const local = useMemo(
     (p) => participants?.filter((p) => p?.local)[0],
@@ -78,7 +79,7 @@ const InCall = () => {
     isSharingScreen ? stopScreenShare() : startScreenShare();
     isVideoTrue();
     // setSharingScreen(!isSharingScreen);
-    setShareScreenHighlight(!highlightSharingScreen)
+    // setShareScreenHighlight(!highlightSharingScreen)
   };
   const handleAudioChange = useCallback(
     () => (local?.audio ? handleMute(local) : handleUnmute(local)),
@@ -125,7 +126,7 @@ const InCall = () => {
                 {local?.audio ? (
                 <MicIcon type="simple" style={true} />
                  ) : ( 
-                   <MutedIcon type="simple" style={true} /> 
+                <MutedIcon type="simple" style={true} /> 
                  )} 
                 <ButtonText>{local?.audio ? "Mute" : "Unmute"}</ButtonText>
               </AudioButton>
@@ -159,16 +160,16 @@ const InCall = () => {
             )}
             {mods?.length < 2 && getAccountType(local?.user_name) === MOD ? (
               <LeaveButtonV2
-                type="submit"
+                // type="submit"
                 onClick={endCall}
-                value="End Call"
-              ></LeaveButtonV2>
+                // value="End Call"
+              >End Call</LeaveButtonV2>
             ) : (
               <LeaveButtonV2
-                type="submit"
+                // type="submit"
                 onClick={leaveCall}
-                value="Leave"
-              ></LeaveButtonV2>
+                // value="Leave"
+              >Leave</LeaveButtonV2>
             )}
           </TrayContent>
         </Tray>
@@ -195,9 +196,10 @@ const LeaveCallButton = styled.button`
   cursor: pointer; */
 `;
 const VideoContainer = styled.div`
-  height: 700px;
-  width: 300px;
-  margin-bottom: 0px;
+  height: 100%;
+  /* width: 300px; */
+  /* margin-bottom: 0px; */
+  /* margin: auto; */
 `;
 const CanSpeakContainer = styled.div`
   border-bottom: ${theme.colors.grey} 1px solid;
@@ -225,7 +227,7 @@ const Tray = styled.div`
   width: 100vw;
   box-sizing: border-box;
   background-color: ${theme.colors.greyLight};
-  padding-top: 10px;
+  padding-top: 20px;
 `;
 const TrayContent = styled.div`
   /* max-width: 600px; */
@@ -270,7 +272,7 @@ const LeaveButton = styled(Button)`
   flex-direction: column;
   cursor: pointer; */
 `;
-const LeaveButtonV2 = styled.input`
+const LeaveButtonV2 = styled.button`
   display: flex;
   /* align-items: center; */
   flex-direction: column;

@@ -30,6 +30,7 @@ export const CallProvider = ({ children }) => {
   const [chatHistory, setChatHistory] = useState([]);
   const [sharedScreenUserId, setSharedScreenUserId] = useState([]);
   const [isSharingScreen, setSharingScreen] = useState(false);
+  const [highlightSharingScreen, setShareScreenHighlight] = useState(false);
 
   const createRoom = async (roomName) => {
     if (roomName) return roomName;
@@ -317,10 +318,12 @@ export const CallProvider = ({ children }) => {
   );
   const startScreenShare = () => {
     if (!callFrame) return;
+    setShareScreenHighlight(!highlightSharingScreen)
     callFrame?.startScreenShare();
   };
   const stopScreenShare = () => {
     if (!callFrame) return;
+    setShareScreenHighlight(!highlightSharingScreen)
     callFrame?.stopScreenShare();
   };
   const changeAccountType = useCallback(
@@ -544,6 +547,8 @@ export const CallProvider = ({ children }) => {
         sharedScreenUserId,
         isSharingScreen,
         setSharingScreen,
+        setShareScreenHighlight,
+        highlightSharingScreen
       }}
     >
       {children}
