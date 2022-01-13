@@ -237,7 +237,7 @@ const TrayContent = styled.div`
   display: flex;
   justify-content: center;
   flex-direction: row;
-  gap: 5%;
+  gap:${ DailyIframe.supportedBrowser().supportsScreenShare?"5% ": "10%"};
   /* gap: 15%; */
   /* justify-content: center; */
   /* margin-left: 20%;
