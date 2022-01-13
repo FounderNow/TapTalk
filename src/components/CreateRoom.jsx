@@ -59,12 +59,17 @@ const Container = styled.div`
   flex-direction: column;
   justify-content: center;
   height: 100%;
-  max-width: 600px;
+  width: 100%;
+  /* max-width: 600px; */
   margin-top: auto;
+  transform: scale(1.20) translateY(10%);
 
   @media only screen and (min-width: 768px) {
     justify-content: flex-start;
     margin-top: 32px;
+  };
+  @media (max-width: 900px) {
+    transform: scale(1)
   }
 `;
 const Title = styled.h1`

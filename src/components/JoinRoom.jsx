@@ -67,7 +67,10 @@ const Container = styled.div`
   height: 100%;
   max-width: 600px;
   margin-top: 48px;
-
+  transform: scale(1.20) translateY(10%);
+  @media (max-width: 900px) {
+    transform: scale(1)
+  }
   @media only screen and (min-width: 768px) {
     justify-content: flex-start;
     margin-top: 32px;

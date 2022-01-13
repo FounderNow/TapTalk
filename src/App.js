@@ -59,10 +59,14 @@ const AppContainer = styled.div`
   background-color: ${theme.colors.greyLightest};
   width: 100%;
   height: 100%;
+  /* transform: scale(1.25) translateY(10%); */
   overflow-y: scroll;
   overflow-x: hidden;
   padding-bottom: 52px;
   box-sizing: border-box;
+  /* @media (max-width: 900px) {
+    transform: scale(1.0) translateY(0px);
+  } */
 `;
 const Wrapper = styled.div`
   max-width: 600px;
@@ -84,6 +88,10 @@ const Logo = styled.img`
 const Header = styled.header`
   display: flex;
   flex-direction: column;
+  transform: scale(1.20) translateY(20%);
+  @media (max-width: 900px) {
+    transform: scale(1)
+  }
 `;
 const HeaderTop = styled.header`
   display: flex;

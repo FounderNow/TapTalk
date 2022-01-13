@@ -1,9 +1,12 @@
 import React, { useRef, useEffect, useLayoutEffect } from "react";
 import styled from "styled-components";
 import { useCallState } from "../CallProvider";
+import { useMediaQuery } from 'react-responsive'
 export const VideoItem = ({ participant }) => {
   const videoRef = useRef(null);
   const { setSharedScreenUserId, sharedScreenUserId } = useCallState();
+  const pcScreen = useMediaQuery({minWidth:"900px"})
+console.log(pcScreen);
 
   useEffect(() => {
     console.log("calling before in conditions===>", participant);
@@ -32,9 +35,7 @@ export const VideoItem = ({ participant }) => {
       playsInline
       id={`video-${participant?.user_id}`}
       ref={videoRef}
-      style={{
-        width: "100%",
-      }}
+      style={{width: "100%", transform: pcScreen?"scale(1.2) translateY(10%)":'scale(1)',marginBottom:'15%'}}
     />
   );
 };

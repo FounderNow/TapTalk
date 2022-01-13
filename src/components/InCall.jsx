@@ -203,9 +203,12 @@ const VideoContainer = styled.div`
 `;
 const CanSpeakContainer = styled.div`
   border-bottom: ${theme.colors.grey} 1px solid;
-  margin-bottom: 24px;
+  margin-bottom: 20%;
   display: flex;
   flex-wrap: wrap;
+  @media (min-width: 900px) {
+    transform: scale(1.20) translateY(10%);
+  }
 `;
 const Header = styled.h2`
   font-size: ${theme.fontSize.large};

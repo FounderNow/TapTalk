@@ -38,10 +38,13 @@ const Container = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-  margin-bottom: 50px;
+  margin-bottom: 20%;
   max-width: 300px;
   margin-left: auto;
   margin-right: auto;
+  @media (min-width: 900px) {
+    transform: scale(1.20) translateY(10%);
+  }
 `;
 const InviteContainer = styled.div`
   border: 1px solid ${theme.colors.grey};
