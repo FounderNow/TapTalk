@@ -229,15 +229,17 @@ const Tray = styled.div`
   height: 80px;
   width: 100vw;
   box-sizing: border-box;
+  align-items: center;
   background-color: ${theme.colors.greyLight};
-  padding-top: 20px;
+  padding: 10px;
 `;
 const TrayContent = styled.div`
   /* max-width: 600px; */
   display: flex;
   justify-content: center;
   flex-direction: row;
-  gap:${ DailyIframe.supportedBrowser().supportsScreenShare?"5% ": "10%"};
+  column-gap:${ DailyIframe.supportedBrowser().supportsScreenShare ? "5% " : "10%"};
+  
   /* gap: 15%; */
   /* justify-content: center; */
   /* margin-left: 20%;
@@ -267,7 +269,7 @@ const LeaveButton = styled(Button)`
   /* align-items: center; */
   flex-direction: column;
   align-items: center;
-  /* justify-content: start; */
+  justify-content: center; 
   /* margin-left: auto;
   display: flex;
   align-items: center;
@@ -292,8 +294,8 @@ const LeaveButtonV2 = styled.button`
   font-family: ${theme.fontFamily.regular};
   border: none;
   @media (max-width: 480px) {
-    padding-left: 6px;
-    padding-right: 6px;
+    padding-left: 14px;
+    padding-right: 14px;
     font-size: 10px;
     font-weight: 600;
   }
