@@ -15,21 +15,7 @@ import DailyIframe from "@daily-co/daily-js";
 import Video from "./Video";
 
 const InCall = () => {
-  const {
-    participants,
-    room,
-    view,
-    getAccountType,
-    leaveCall,
-    handleMute,
-    handleUnmute,
-    raiseHand,
-    lowerHand,
-    endCall,
-    stopScreenShare,
-    highlightSharingScreen,
-    startScreenShare,
-  } = useCallState();
+  const { participants, room, view, getAccountType, leaveCall, handleMute, handleUnmute, raiseHand, lowerHand, endCall, stopScreenShare, highlightSharingScreen, startScreenShare, } = useCallState();
   let screenSharingParticipant;
   const [displayChat, setChatDisplay] = useState(false);
   const [highlightedChat, setChatHighlight] = useState(false);
@@ -238,7 +224,7 @@ const TrayContent = styled.div`
   display: flex;
   justify-content: center;
   flex-direction: row;
-  column-gap:${ DailyIframe.supportedBrowser().supportsScreenShare ? "5% " : "10%"};
+  column-gap:${ DailyIframe.supportedBrowser().supportsScreenShare ? "5% " : "12%"};
   
   /* gap: 15%; */
   /* justify-content: center; */
