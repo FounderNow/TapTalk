@@ -295,6 +295,7 @@ const LeaveButtonV2 = styled.button`
   background-color: ${theme.colors.redDark};
   color: ${theme.colors.white} */
 `;
+
 const HandButton = styled(Button)`
   /* margin-right: auto; */
 `;
