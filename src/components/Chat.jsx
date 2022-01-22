@@ -1,13 +1,9 @@
 import React, { useState, useEffect, useRef } from "react";
-// import CallObjectContext from "../../CallObjectContext";
 import { useCallState } from "../CallProvider";
-// import "./Chat.css";
 import styled from "styled-components";
 
 const Chat = (props) => {
-  // const callObject = useContext(CallObjectContext);
   const [inputValue, setInputValue] = useState("");
-  // const [chatHistory, setChatHistory] = useState([]);
   const { chatHistory, sendMessage ,displayName} = useCallState();
   const [onView, setonView] = useState("Chat");
   const messagesRef = useRef(null);
@@ -20,57 +16,11 @@ const Chat = (props) => {
   }, [chatHistory]);
   function handleSubmit(event) {
     event.preventDefault();
-    console.log("Messages State", chatHistory);
     if (inputValue) {
       sendMessage({ message: inputValue });
     }
-    // callObject.sendAppMessage({ message: inputValue }, "*");
-    // const name = callObject.participants().local.user_name
-    //   ? callObject.participants().local.user_name
-    //   : "Guest";
-    // setChatHistory([
-    //   ...chatHistory,
-    //   {
-    //     sender: name,
-    //     message: inputValue,
-    //   },
-    // ]);
     setInputValue("");
   }
-
-  /**
-   * Update chat state based on a message received to all participants.
-   *
-   */
-  // useEffect(() => {
-  //   if (!callObject) {
-  //     return;
-  //   }
-
-  //   function (event) {
-  //     const participants = callObject.participants();
-  //     const name = participants[event.fromId].user_name
-  //       ? participants[event.fromId].user_name
-  //       : "Guest";
-  //     setChatHistory([
-  //       ...chatHistory,
-  //       {
-  //         sender: name,
-  //         message: event.data.message,
-  //       },
-  //     ]);
-  //     // Make other icons light up
-  //     props.notification();
-  //   }
-
-  //   callObject.on("app-message", handleAppMessage);
-
-  //   return function cleanup() {
-  //     callObject.off("app-message", handleAppMessage);
-  //   };
-  // }, [callObject, chatHistory]);
-
-  // useEffect(() => {}, [chatHistory]);
 
   return props.onClickDisplay ? (
     <ChatRoom>
@@ -118,7 +68,6 @@ const Chat = (props) => {
         {onView === "Chat" && (
           <>
             <form onSubmit={handleSubmit}>
-              {/* <label htmlFor="chatInput"></label> */}
               <ChatInput
                 id="chatInput"
                 className="chat-input"
@@ -129,8 +78,6 @@ const Chat = (props) => {
               ></ChatInput>
               <SendChatButton onClick={handleSubmit}>{">>"}</SendChatButton>
             </form>
-
-            {/* <FooterManu> Download chat(.txt)</FooterManu> */}
           </>
         )}
       </ChatHistory>
@@ -142,12 +89,6 @@ const ChatRoom = styled.div`
   position: absolute;
   right: 10px;
   bottom: 75px;
-  /*width: 250px;
-  height: calc(100% - 80px);
-  background-color: #ffffff;
-  border-radius: 4px;
-  border-style: groove;
-  background-color: red; */
 `;
 const Participant = styled.p`
   font-size: 12px;
@@ -200,10 +141,6 @@ const MessageList = styled.div`
   padding: 1px 6px 1px 6px;
   font-weight: 400;
   font-size: 12px;
-  /* background-color: #1bebb9; */
-  /* border-radius: 10px 10px 10px 10px; */
-  /* margin: 4px 10px 15px 10px; */
-  /* height: 38px; */
 `;
 const MessageSender = styled.p`
   font-size: 8px;

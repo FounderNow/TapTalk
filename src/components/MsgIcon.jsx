@@ -1,6 +1,6 @@
 import styled from "styled-components";
 import msg from "../icons/chat-final.svg";
-import msgHighlight from "../icons/chat-icon-highlight.svg";
+// import msgHighlight from "../icons/chat-icon-highlight.svg";
 
 const MsgIcon = ({ highlighted = false }) => {
   console.log('highlightedChat', highlighted)

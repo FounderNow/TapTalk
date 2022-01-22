@@ -59,14 +59,10 @@ const AppContainer = styled.div`
   background-color: ${theme.colors.greyLightest};
   width: 100%;
   height: 100%;
-  /* transform: scale(1.25) translateY(10%); */
   overflow-y: scroll;
   overflow-x: hidden;
   padding-bottom: 52px;
   box-sizing: border-box;
-  /* @media (max-width: 900px) {
-    transform: scale(1.0) translateY(0px);
-  } */
 `;
 const Wrapper = styled.div`
   max-width: 600px;

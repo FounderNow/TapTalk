@@ -60,7 +60,6 @@ const Container = styled.div`
   justify-content: center;
   height: 100%;
   width: 100%;
-  /* max-width: 600px; */
   margin-top: auto;
   transform: scale(1.20) translateY(10%);
 

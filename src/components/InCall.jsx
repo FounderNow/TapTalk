@@ -19,7 +19,6 @@ const InCall = () => {
   let screenSharingParticipant;
   const [displayChat, setChatDisplay] = useState(false);
   const [highlightedChat, setChatHighlight] = useState(false);
-  // const [highlightSharingScreen, setShareScreenHighlight] = useState(false);
   const [isSharingScreen, setSharingScreen] = useState(false);
   const local = useMemo(
     (p) => participants?.filter((p) => p?.local)[0],
@@ -27,9 +26,7 @@ const InCall = () => {
   );
   const toggleChat = () => {
     setChatDisplay(!displayChat);
-    // if (highlightedChat) {
       setChatHighlight(!highlightedChat);
-    // }
   };
   const mods = useMemo(
     () =>
@@ -64,8 +61,6 @@ const InCall = () => {
   const toggleSharingScreen = () => {
     isSharingScreen ? stopScreenShare() : startScreenShare();
     isVideoTrue();
-    // setSharingScreen(!isSharingScreen);
-    // setShareScreenHighlight(!highlightSharingScreen)
   };
   const handleAudioChange = useCallback(
     () => (local?.audio ? handleMute(local) : handleUnmute(local)),
@@ -146,15 +141,11 @@ const InCall = () => {
             )}
             {mods?.length < 2 && getAccountType(local?.user_name) === MOD ? (
               <LeaveButtonV2
-                // type="submit"
                 onClick={endCall}
-                // value="End Call"
               >End Call</LeaveButtonV2>
             ) : (
               <LeaveButtonV2
-                // type="submit"
                 onClick={leaveCall}
-                // value="Leave"
               >Leave</LeaveButtonV2>
             )}
           </TrayContent>
@@ -172,20 +163,8 @@ const Container = styled.div`
   visibility: ${(props) => (props.hidden ? "hidden" : "visible")};
   height: ${(props) => (props.hidden ? "0" : "100%")};
 `;
-const LeaveCallButton = styled.button`
-  /* margin-left: auto;
-  align-items: center;
-  background-color: red;
-  color: white;
-  border-radius: 3px;
-  font-weight: 600;
-  cursor: pointer; */
-`;
 const VideoContainer = styled.div`
   height: 100%;
-  /* width: 300px; */
-  /* margin-bottom: 0px; */
-  /* margin: auto; */
 `;
 const CanSpeakContainer = styled.div`
   border-bottom: ${theme.colors.grey} 1px solid;
@@ -207,7 +186,6 @@ const CallHeader = styled.div`
   margin-top: 24px;
 `;
 const Tray = styled.div`
-  /* display: flex; */
   justify-content: center;
   position: fixed;
   bottom: 0;
@@ -220,24 +198,11 @@ const Tray = styled.div`
   padding: 10px;
 `;
 const TrayContent = styled.div`
-  /* max-width: 600px; */
   display: flex;
   justify-content: center;
   flex-direction: row;
   column-gap:${ DailyIframe.supportedBrowser().supportsScreenShare ? "5% " : "14%"};
-  
-  /* gap: 15%; */
-  /* justify-content: center; */
-  /* margin-left: 20%;
-  margin-right: 20%;
-  flex-wrap: wrap;
- justify-content: center; */
-  /* @media only screen and (min-width: 480px) {
-    justify-content: ${(props) => (props.center ? "center" : "flex-start")};
-    gap: 2%;
-  } */
-  /* justify-content: space-between; */
-  /* width: 100%; */
+
 `;
 const Button = styled.button`
   font-weight: 600;
@@ -252,20 +217,12 @@ const Button = styled.button`
 `;
 const LeaveButton = styled(Button)`
   display: flex;
-  /* align-items: center; */
   flex-direction: column;
   align-items: center;
   justify-content: center; 
-  /* margin-left: auto;
-  display: flex;
-  align-items: center;
-  justify-content:center;
-  flex-direction: column;
-  cursor: pointer; */
 `;
 const LeaveButtonV2 = styled.button`
   display: flex;
-  /* align-items: center; */
   flex-direction: column;
   justify-content: center;
   margin-top: 10px;
@@ -288,36 +245,21 @@ const LeaveButtonV2 = styled.button`
   &:hover {
     cursor: pointer;
   }
-  /* margin-left: auto;
-  align-items: center;
-  margin-top: 8px;
-  height: 70%;
-  background-color: ${theme.colors.redDark};
-  color: ${theme.colors.white} */
 `;
 const HandButton = styled(Button)`
-  /* margin-right: auto; */
 `;
 const AudioButton = styled(Button)`
-  /* margin-right: auto; */
   display: flex;
-  /* align-items: center; */
   flex-direction: column;
   align-items: center;
   justify-content: center;
   min-width: 70px;
-  /* margin-top: auto; */
-  /* &:nth-child(1){
-    padding-left: 4px;
-  } */
 `;
 const ButtonText = styled.span`
-  /* margin-left: 4px; */
   font-family: ${theme.fontFamily.regular};
   font-weight: 400;
   font-size: ${theme.fontSize.med};
   margin-top: auto;
-  /* color : ${theme.colors.turquoise}; */
 `;
 
 export default InCall;

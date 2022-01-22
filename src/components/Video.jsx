@@ -9,11 +9,6 @@ export const VideoItem = ({ participant }) => {
 console.log(pcScreen);
 
   useEffect(() => {
-    console.log("calling before in conditions===>", participant);
-    // if (!participant?.videoTrack || !videoRef.current || participant?.local)
-    //   return;
-    // sanity check to make sure this is an audio track
-    console.log(JSON.parse(JSON.stringify(participant)), "dtaaaaa===>");
     if (
       participant?.tracks?.screenVideo &&
       participant?.tracks?.screenVideo?.state === "playable"
@@ -39,25 +34,25 @@ console.log(pcScreen);
     />
   );
 };
-
-export const Video = ({ participants }) => {
-  // participant)
+/**
+ *finding out the participant how shared screen 
+ *
+ * @param {*} { participants }
+ * @return {*} 
+ */
+const Video = ({ participants }) => {
   let participant;
-  // useEffect(() => {
+  
   participant = participants.filter(
     (userList) => userList?.tracks?.screenVideo?.state === "playable"
   );
-  console.log("video", JSON.parse(JSON.stringify(participant)));
-  // }, [participant])
 
   return (
     <>
-      {/* {participants.map((p) => ( */}
       <VideoItem
         participant={participant?.length ? participant[0] : {}}
         key={`p-${participant?.length ? participant[0]?.user_id : ""}`}
       />
-      {/* ))} */}
     </>
   );
 };
