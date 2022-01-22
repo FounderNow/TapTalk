@@ -73,7 +73,7 @@ const InCall = () => {
   );
   const isVideoTrue = () => {};
   useEffect(() => {
-    console.log("isVideoTrue", participants);
+    // console.log("isVideoTrue", participants);
     screenSharingParticipant = participants?.filter((item) =>
       item?.tracks?.screenVideo?.state.includes("playable")
     );
@@ -86,7 +86,7 @@ const InCall = () => {
 
   return (
     <>
-      {console.log(local, "local")}
+      {/* {console.log(local, "local")} */}
       <Container hidden={view !== INCALL}>
         <CallHeader>
           <Header></Header>

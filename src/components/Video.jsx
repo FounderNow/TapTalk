@@ -6,7 +6,7 @@ export const VideoItem = ({ participant }) => {
   const videoRef = useRef(null);
   const { setSharedScreenUserId, sharedScreenUserId } = useCallState();
   const pcScreen = useMediaQuery({minWidth:"900px"})
-console.log(pcScreen);
+// console.log(pcScreen);
 
   useEffect(() => {
     if (

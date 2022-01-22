@@ -23,7 +23,7 @@ const Counter = () => {
       const value = Math.floor(secs / 60) + ":" + ("0" + (secs % 60)).slice(-2);
       if (secs <= 0) {
         clearInterval(interval.current);
-        console.log("Eep! Room has expired");
+        // console.log("Eep! Room has expired");
         leaveCall();
         return;
       }

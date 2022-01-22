@@ -12,7 +12,7 @@ const Chat = (props) => {
   };
   useEffect(() => {
     messagesRef?.current?.scrollIntoView(true);
-    console.log("calling", props.participants);
+    // console.log("calling", props.participants);
   }, [chatHistory]);
   function handleSubmit(event) {
     event.preventDefault();
