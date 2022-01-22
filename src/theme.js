@@ -27,7 +27,7 @@ const theme = {
     sherpaBlue: "#013e54",
     black: "#000000",
     cyanShade: "#00658B",
-    deepSkyBlue : "#06B0EF"
+    deepSkyBlue: "#06B0EF",
   },
   fontSize: {
     small: "11px",
@@ -41,7 +41,7 @@ const theme = {
     regular: "Helvetica, Arial, sans-serif",
     log: "Montserrat",
     subHeading: "Roboto",
-    subText : "Aileron, Regular"
+    subText: "Aileron, Regular",
   },
 };
 

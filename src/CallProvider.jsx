@@ -27,6 +27,10 @@ export const CallProvider = ({ children }) => {
   const [roomExp, setRoomExp] = useState(null);
   const [activeSpeakerId, setActiveSpeakerId] = useState(null);
   const [updateParticipants, setUpdateParticipants] = useState(null);
+  const [chatHistory, setChatHistory] = useState([]);
+  const [sharedScreenUserId, setSharedScreenUserId] = useState([]);
+  const [isSharingScreen, setSharingScreen] = useState(false);
+  const [highlightSharingScreen, setShareScreenHighlight] = useState(false);
 
   const createRoom = async (roomName) => {
     if (roomName) return roomName;
@@ -120,7 +124,7 @@ export const CallProvider = ({ children }) => {
           `joined-${evt?.participant?.user_id}-${Date.now()}`
         );
         setView(INCALL);
-        console.log("[JOINED MEETING]", evt?.participant);
+        // console.log("[JOINED MEETING]", evt?.participant);
       }
 
       call.on("joined-meeting", handleJoinedMeeting);
@@ -160,30 +164,30 @@ export const CallProvider = ({ children }) => {
 
   const handleParticipantJoinedOrUpdated = useCallback((evt) => {
     setUpdateParticipants(`updated-${evt?.participant?.user_id}-${Date.now()}`);
-    console.log("[PARTICIPANT JOINED/UPDATED]", evt.participant);
+    // console.log("[PARTICIPANT JOINED/UPDATED]", evt.participant);
   }, []);
 
   const handleParticipantLeft = useCallback((evt) => {
     setUpdateParticipants(`left-${evt?.participant?.user_id}-${Date.now()}`);
-    console.log("[PARTICIPANT LEFT]", evt);
+    // console.log("[PARTICIPANT LEFT]", evt);
   }, []);
   const handleActiveSpeakerChange = useCallback((evt) => {
-    console.log("[ACTIVE SPEAKER CHANGE]", evt);
+    // console.log("[ACTIVE SPEAKER CHANGE]", evt);
     setActiveSpeakerId(evt?.activeSpeaker?.peerId);
   }, []);
 
   const playTrack = useCallback((evt) => {
-    console.log(
-      "[TRACK STARTED]",
-      evt.participant && evt.participant.session_id
-    );
+    // console.log(
+    //   "[TRACK STARTED]",
+    //   evt.participant && evt.participant.session_id
+    // );
     setUpdateParticipants(
       `track-started-${evt?.participant?.user_id}-${Date.now()}`
     );
   }, []);
 
   const destroyTrack = useCallback((evt) => {
-    console.log("[DESTROY TRACK]", evt);
+    // console.log("[DESTROY TRACK]", evt);
     setUpdateParticipants(
       `track-stopped-${evt?.participant?.user_id}-${Date.now()}`
     );
@@ -201,16 +205,16 @@ export const CallProvider = ({ children }) => {
       await callFrame.leave();
     }
     leave();
-    if (typeof window !== 'undefined') {
-      window.location.href = '/';
- }
+    if (typeof window !== "undefined") {
+      window.location.href = "/";
+    }
     setView(CREATEROOM);
   }, [callFrame]);
 
   const removeFromCall = useCallback(
     (participant) => {
       if (!callFrame) return;
-      console.log("[EJECTING PARTICIPANT]", participant?.user_id);
+      // console.log("[EJECTING PARTICIPANT]", participant?.user_id);
       /**
        * When the remote participant receives this message, they'll leave
        * the call on their end.
@@ -224,15 +228,14 @@ export const CallProvider = ({ children }) => {
   );
 
   const createRoomCall = useCallback(() => {
-    setView(CREATEROOM)
-    if (typeof window !== 'undefined') {
-      window.location.href = '/';
- }
+    setView(CREATEROOM);
+    if (typeof window !== "undefined") {
+      window.open (window.location.origin);
+    }
   }, []);
 
-
   const endCall = useCallback(() => {
-    console.log("[ENDING CALL]");
+    // console.log("[ENDING CALL]");
     participants.forEach((p) => removeFromCall(p));
     leaveCall();
   }, [participants, removeFromCall, leaveCall]);
@@ -281,7 +284,7 @@ export const CallProvider = ({ children }) => {
   const handleUnmute = useCallback(
     (p) => {
       if (!callFrame) return;
-      console.log("UNMUTING");
+      // console.log("UNMUTING");
       if (p?.user_id === "local") {
         callFrame.setLocalAudio(true);
       } else {
@@ -296,7 +299,7 @@ export const CallProvider = ({ children }) => {
   const raiseHand = useCallback(
     (p) => {
       if (!callFrame) return;
-      console.log("RAISING HAND");
+      // console.log("RAISING HAND");
       callFrame.setUserName(`✋ ${p?.user_name}`);
       setUpdateParticipants(`raising-hand-${p?.user_id}-${Date.now()}`);
     },
@@ -305,7 +308,7 @@ export const CallProvider = ({ children }) => {
   const lowerHand = useCallback(
     (p) => {
       if (!callFrame) return;
-      console.log("UNRAISING HAND");
+      // console.log("UNRAISING HAND");
       const split = p?.user_name.split("✋ ");
       const username = split.length === 2 ? split[1] : split[0];
       callFrame.setUserName(username);
@@ -313,7 +316,16 @@ export const CallProvider = ({ children }) => {
     },
     [callFrame]
   );
-
+  const startScreenShare = () => {
+    if (!callFrame) return;
+    setShareScreenHighlight(!highlightSharingScreen)
+    callFrame?.startScreenShare();
+  };
+  const stopScreenShare = () => {
+    if (!callFrame) return;
+    setShareScreenHighlight(!highlightSharingScreen)
+    callFrame?.stopScreenShare();
+  };
   const changeAccountType = useCallback(
     (participant, accountType) => {
       if (!participant || ![MOD, SPEAKER, LISTENER].includes(accountType))
@@ -344,7 +356,7 @@ export const CallProvider = ({ children }) => {
           ? MSG_MAKE_SPEAKER
           : MSG_MAKE_LISTENER;
 
-      console.log("[UPDATING PARTICIPANT]");
+      // console.log("[UPDATING PARTICIPANT]");
       if (msg === MSG_MAKE_LISTENER) {
         handleMute(participant);
       }
@@ -355,16 +367,56 @@ export const CallProvider = ({ children }) => {
     },
     [getAccountType, displayName, handleMute, callFrame]
   );
+  const sendMessage = useCallback(
+    ({ message }) => {
+      callFrame.sendAppMessage({ message: message }, "*");
+      const name = callFrame?.participants()?.local?.user_name
+        ? callFrame?.participants()?.local?.user_name
+        : "Guest";
+      // console.log("chatHistory in send ===>", chatHistory);
+      setChatHistory((state) => [
+        ...state,
+        {
+          sender: name,
+          message: message,
+          type : 1 //1 => self message 2: visitor message
+        },
+      ]);
+    },
+    [callFrame]
+  );
+  const receiveMessage = useCallback(
+    (event) => {
+      const participants = callFrame.participants();
+      // console.log("chatHistory in recieve ===>", event.data);
+      const name = participants[event.fromId].user_name
+        ? participants[event.fromId].user_name
+        : "Guest";
+      setChatHistory(state=>[
+        ...state,
+        {
+          sender: name,
+          message: event.data.message,
+          type : 2 //1 => self message 2: visitor message
+        },
+      ]);
+    },
+    [callFrame]
+  );
+
+  useEffect(() => {
+    // console.log("Chat history updated:  ", chatHistory);
+  }, [chatHistory]);
 
   useEffect(() => {
     if (!callFrame) return;
 
     const handleAppMessage = async (evt) => {
-      console.log("[APP MESSAGE]", evt);
+      // console.log("[APP MESSAGE]", evt);
       try {
         switch (evt?.data?.msg) {
           case MSG_MAKE_MODERATOR:
-            console.log("[LEAVING]");
+            // console.log("[LEAVING]");
             await callFrame.leave();
             let userName = evt?.data?.userName;
             if (userName?.includes("✋")) {
@@ -396,16 +448,17 @@ export const CallProvider = ({ children }) => {
     };
 
     const showError = (e) => {
-      console.log("[ERROR]");
+      // console.log("[ERROR]");
       console.warn(e);
     };
 
-    console.log(callFrame?.meetingState());
+    // console.log(callFrame?.meetingState());
     callFrame.on("error", showError);
     callFrame.on("participant-joined", handleParticipantJoinedOrUpdated);
     callFrame.on("participant-updated", handleParticipantJoinedOrUpdated);
     callFrame.on("participant-left", handleParticipantLeft);
     callFrame.on("app-message", handleAppMessage);
+    callFrame.on("app-message", receiveMessage);
     callFrame.on("active-speaker-change", handleActiveSpeakerChange);
     callFrame.on("track-started", playTrack);
     callFrame.on("track-stopped", destroyTrack);
@@ -416,7 +469,8 @@ export const CallProvider = ({ children }) => {
       callFrame.off("participant-joined", handleParticipantJoinedOrUpdated);
       callFrame.off("participant-updated", handleParticipantJoinedOrUpdated);
       callFrame.off("participant-left", handleParticipantLeft);
-      callFrame.off("app-message", handleAppMessage);
+      // callFrame.off("app-message", handleAppMessage);
+      callFrame.off("app-message", receiveMessage);
       callFrame.off("active-speaker-change", handleActiveSpeakerChange);
       callFrame.off("track-started", playTrack);
       callFrame.off("track-stopped", destroyTrack);
@@ -442,7 +496,7 @@ export const CallProvider = ({ children }) => {
    */
   useEffect(() => {
     if (updateParticipants) {
-      console.log("[UPDATING PARTICIPANT LIST]");
+      // console.log("[UPDATING PARTICIPANT LIST]");
       const list = Object.values(callFrame?.participants() || {});
       setParticipants(list);
     }
@@ -451,7 +505,7 @@ export const CallProvider = ({ children }) => {
   useEffect(() => {
     if (!callFrame) return;
     async function getRoom() {
-      console.log("[GETTING ROOM DETAILS]");
+      // console.log("[GETTING ROOM DETAILS]");
       const room = await callFrame?.room();
       const exp = room?.config?.exp;
       setRoom(room);
@@ -478,12 +532,23 @@ export const CallProvider = ({ children }) => {
         raiseHand,
         lowerHand,
         setView,
+        receiveMessage,
         activeSpeakerId,
         error,
         participants,
         room,
         roomExp,
         view,
+        chatHistory,
+        sendMessage,
+        stopScreenShare,
+        startScreenShare,
+        setSharedScreenUserId,
+        sharedScreenUserId,
+        isSharingScreen,
+        setSharingScreen,
+        setShareScreenHighlight,
+        highlightSharingScreen
       }}
     >
       {children}

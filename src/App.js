@@ -18,20 +18,18 @@ const AppContent = () => {
   const { view, setView, createRoomCall } = useCallState();
   let search = window.location.search;
   let params = new URLSearchParams(search);
-  let isRoomId = false;
   let joinRoomId = params.get("roomId");
   if (joinRoomId && view !== INCALL) {
     setView(PREJOIN);
   }
-  console.log("view and isRoomId", isRoomId, joinRoomId, view);
   return (
     <AppContainer>
       <Wrapper>
         <Header>
           <HeaderTop>
-            <Logo src="/TapTalk_Logo-removebg-preview.png" alt="" />
+            <Logo src="/taptalk_logo-croped.png" alt="" />
             {view === INCALL && (
-              <CreateRoomButton onClick={createRoomCall}>
+              <CreateRoomButton onClick={()=> window.open (window.location.origin)}>
                 <CreateRoomButtonText>Create a New Room</CreateRoomButtonText>
               </CreateRoomButton>
             )}
@@ -43,7 +41,7 @@ const AppContent = () => {
       </Wrapper>
       <Footer>
         {/* <Link>About Us</Link> */}
-        <CopyRight>Copyright © 2021 TapTalk</CopyRight>
+        {view !== INCALL && <CopyRight>Copyright © 2021 TapTalk</CopyRight>}
       </Footer>
     </AppContainer>
   );
@@ -80,12 +78,16 @@ const CopyRight = styled.span`
   font-weight: 400;
 `;
 const Logo = styled.img`
-  height: 88px;
-  margin-bottom: 2%;
+  height: 60px;
+  margin-bottom: 0%;
 `;
 const Header = styled.header`
   display: flex;
   flex-direction: column;
+  transform: scale(1.20) translateY(20%);
+  @media (max-width: 900px) {
+    transform: scale(1)
+  }
 `;
 const HeaderTop = styled.header`
   display: flex;
@@ -112,9 +114,9 @@ const CreateRoomButton = styled.button`
 `;
 const CreateRoomButtonText = styled.span`
   color: ${theme.colors.deepSkyBlue};
-  font-weight: 600;
-  font-size: ${theme.fontSize.med};
-  font-family: ${theme.fontFamily.subText};
+  font-weight: 500;
+  font-size: ${theme.fontSize.base};
+  font-family: ${theme.fontFamily.regular};
   margin-left: 4px;
 `;
 

@@ -21,21 +21,18 @@ const CreateRoom = () => {
       e.preventDefault();
       if (submitting) return;
       setSubmitting(true);
-      if (
-        !firstNameRef?.current
-      )
-        return;
+      if (!firstNameRef?.current) return;
       let userName = `${firstNameRef?.current?.value}`;
       let name = "";
-        /**
-         * If they're not submitting a specific room name, we'll create a new
-         * room in joinRoom() so let's make them the moderator by default.
-         */
-        userName = `${userName?.trim()}_${MOD}`;
+      /**
+       * If they're not submitting a specific room name, we'll create a new
+       * room in joinRoom() so let's make them the moderator by default.
+       */
+      userName = `${userName?.trim()}_${MOD}`;
       joinRoom({ userName, name });
     },
     [firstNameRef, joinRoom, submitting]
-  );  
+  );
 
   return (
     <Container>
@@ -49,11 +46,7 @@ const CreateRoom = () => {
           placeholder="First name (or nickname)"
           required
         />
-        <Submit>{
-            submitting
-              ? "Creating..."
-              : "Create room"
-          }</Submit>
+        <Submit>{submitting ? "Creating..." : "Create room"}</Submit>
         {error && <ErrorText>Error: {error.toString()}</ErrorText>}
       </Form>
     </Container>
@@ -66,12 +59,16 @@ const Container = styled.div`
   flex-direction: column;
   justify-content: center;
   height: 100%;
-  max-width: 600px;
+  width: 100%;
   margin-top: auto;
+  transform: scale(1.20) translateY(10%);
 
   @media only screen and (min-width: 768px) {
     justify-content: flex-start;
     margin-top: 32px;
+  };
+  @media (max-width: 900px) {
+    transform: scale(1)
   }
 `;
 const Title = styled.h1`

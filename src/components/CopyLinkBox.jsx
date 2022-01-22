@@ -1,25 +1,25 @@
 import { useState } from "react";
 import styled from "styled-components";
 import theme from "../theme";
-import copy from 'copy-to-clipboard';
+import copy from "copy-to-clipboard";
 
 const CopyLinkBox = ({ room }) => {
   const [linkCopied, setLinkCopied] = useState(false);
-  
-  const currentURL = window.location.href // returns the absolute URL of a page
+
+  const currentURL = window.location.href; // returns the absolute URL of a page
   return (
     <Container>
       <InviteContainer>
         <Header>Invite Your Friends</Header>
-        <SubHeader>
-          Copy and share room link below.{" "}
-        </SubHeader>
+        <SubHeader>Copy and share room link below. </SubHeader>
         <CopyButton
           onClick={() => {
             if (navigator?.clipboard?.writeText) {
-              navigator.clipboard.writeText(`${currentURL}?roomId=${room?.name}`);
+              navigator.clipboard.writeText(
+                `${currentURL}?roomId=${room?.name}`
+              );
             } else {
-              copy(`${currentURL}?roomId=${room?.name}`)
+              copy(`${currentURL}?roomId=${room?.name}`);
             }
             setLinkCopied(true);
             setTimeout(() => setLinkCopied(false), 5000);
@@ -38,10 +38,13 @@ const Container = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-  margin-bottom: 24px;
+  margin-bottom: 20%;
   max-width: 300px;
   margin-left: auto;
   margin-right: auto;
+  @media (min-width: 900px) {
+    transform: scale(1.20) translateY(10%);
+  }
 `;
 const InviteContainer = styled.div`
   border: 1px solid ${theme.colors.grey};
@@ -83,7 +86,7 @@ const CopyButtonText = styled.span`
   font-size: ${theme.fontSize.base};
   font-weight: 600;
   text-align: center;
-  color: ${theme.colors.white}
+  color: ${theme.colors.white};
 `;
 
 export default CopyLinkBox;
