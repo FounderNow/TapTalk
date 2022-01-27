@@ -1,8 +1,10 @@
 import styled from "styled-components";
+import {useEffect} from 'react';
 import InCall from "./components/InCall";
 import CreateRoom from "./components/CreateRoom";
 import JoinRoom from "./components/JoinRoom";
 import theme from "./theme";
+import ReactGA from "react-ga";
 import {
   CallProvider,
   CREATEROOM,
@@ -22,6 +24,7 @@ const AppContent = () => {
   if (joinRoomId && view !== INCALL) {
     setView(PREJOIN);
   }
+
   return (
     <AppContainer>
       <Wrapper>
@@ -29,7 +32,9 @@ const AppContent = () => {
           <HeaderTop>
             <Logo src="/taptalk_logo-croped.png" alt="" />
             {view === INCALL && (
-              <CreateRoomButton onClick={()=> window.open (window.location.origin)}>
+              <CreateRoomButton
+                onClick={() => window.open(window.location.origin)}
+              >
                 <CreateRoomButtonText>Create a New Room</CreateRoomButtonText>
               </CreateRoomButton>
             )}
@@ -48,6 +53,11 @@ const AppContent = () => {
 };
 
 function App() {
+  useEffect(() => {
+    ReactGA.initialize("G-G5MTYZRQLD");
+    ReactGA.pageview(window.location.pathname + window.location.search);
+  }, []);
+
   return (
     <CallProvider>
       <AppContent />
@@ -84,9 +94,9 @@ const Logo = styled.img`
 const Header = styled.header`
   display: flex;
   flex-direction: column;
-  transform: scale(1.20) translateY(20%);
+  transform: scale(1.2) translateY(20%);
   @media (max-width: 900px) {
-    transform: scale(1)
+    transform: scale(1);
   }
 `;
 const HeaderTop = styled.header`
