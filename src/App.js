@@ -4,7 +4,6 @@ import InCall from "./components/InCall";
 import CreateRoom from "./components/CreateRoom";
 import JoinRoom from "./components/JoinRoom";
 import theme from "./theme";
-import ReactGA from "react-ga";
 import {
   CallProvider,
   CREATEROOM,
@@ -24,6 +23,7 @@ const AppContent = () => {
   if (joinRoomId && view !== INCALL) {
     setView(PREJOIN);
   }
+
 
   return (
     <AppContainer>
@@ -53,10 +53,7 @@ const AppContent = () => {
 };
 
 function App() {
-  useEffect(() => {
-    ReactGA.initialize("G-G5MTYZRQLD");
-    ReactGA.pageview(window.location.pathname + window.location.search);
-  }, []);
+
 
   return (
     <CallProvider>
