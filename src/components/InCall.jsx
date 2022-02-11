@@ -74,6 +74,7 @@ const InCall = () => {
   const isVideoTrue = () => {};
   useEffect(() => {
     // console.log("isVideoTrue", participants);
+    // eslint-disable-next-line 
     screenSharingParticipant = participants?.filter((item) =>
       item?.tracks?.screenVideo?.state.includes("playable")
     );
@@ -82,6 +83,7 @@ const InCall = () => {
     } else {
       setSharingScreen(false);
     }
+    // eslint-disable-next-line 
   }, [participants]);
 
   return (
@@ -105,9 +107,9 @@ const InCall = () => {
             {[MOD, SPEAKER].includes(getAccountType(local?.user_name)) ? (
               <AudioButton onClick={handleAudioChange}>
                 {local?.audio ? (
-                <MicIcon type="simple" style={true} />
+                <MicIcon type="simple"  />
                  ) : ( 
-                <MutedIcon type="simple" style={true} /> 
+                <MutedIcon type="simple"/> 
                  )} 
                 <ButtonText>{local?.audio ? "Mute" : "Unmute"}</ButtonText>
               </AudioButton>

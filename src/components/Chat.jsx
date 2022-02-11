@@ -90,21 +90,21 @@ const ChatRoom = styled.div`
   right: 10px;
   bottom: 75px;
 `;
-const Participant = styled.p`
-  font-size: 12px;
-  font-weight: 600;
-  line-height: 16px;
-  &:nth-child(2) {
-    margin-left: auto;
-    padding-right: 10px;
-  }
-`;
-const PartcipentsList = styled.div`
-  display: flex;
-  flex-direction: row;
-  padding-left: 10px;
-  height: 30px;
-`;
+// const Participant = styled.p`
+//   font-size: 12px;
+//   font-weight: 600;
+//   line-height: 16px;
+//   &:nth-child(2) {
+//     margin-left: auto;
+//     padding-right: 10px;
+//   }
+// `;
+// const PartcipentsList = styled.div`
+//   display: flex;
+//   flex-direction: row;
+//   padding-left: 10px;
+//   height: 30px;
+// `;
 const ChatHeadingList = styled.ul`
   list-style: none;
   display: flex;
@@ -148,16 +148,16 @@ const MessageSender = styled.p`
   margin-top: -9px;
   color: #757272;
 `;
-const FooterManu = styled.div`
-  position: absolute;
-  bottom: 1px;
-  font-size: 12px;
-  margin-left: 4px;
-  margin-right: 4px;
-  padding-left: 10px;
-  color: #6b7785;
-  right: 10px;
-`;
+// const FooterManu = styled.div`
+//   position: absolute;
+//   bottom: 1px;
+//   font-size: 12px;
+//   margin-left: 4px;
+//   margin-right: 4px;
+//   padding-left: 10px;
+//   color: #6b7785;
+//   right: 10px;
+// `;
 const Message = styled.p`
   background-color: #1bebb9;
   padding: 4px;

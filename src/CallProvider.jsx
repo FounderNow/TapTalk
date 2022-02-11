@@ -404,9 +404,9 @@ export const CallProvider = ({ children }) => {
     [callFrame]
   );
 
-  useEffect(() => {
-    // console.log("Chat history updated:  ", chatHistory);
-  }, [chatHistory]);
+  // useEffect(() => {
+  //   // console.log("Chat history updated:  ", chatHistory);
+  // }, [chatHistory]);
 
   useEffect(() => {
     if (!callFrame) return;
@@ -475,6 +475,7 @@ export const CallProvider = ({ children }) => {
       callFrame.off("track-started", playTrack);
       callFrame.off("track-stopped", destroyTrack);
     };
+    // eslint-disable-next-line
   }, [
     callFrame,
     joinRoom,

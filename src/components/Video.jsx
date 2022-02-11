@@ -1,10 +1,10 @@
-import React, { useRef, useEffect, useLayoutEffect } from "react";
-import styled from "styled-components";
+import React, { useRef, useEffect } from "react";
+// import styled from "styled-components";
 import { useCallState } from "../CallProvider";
 import { useMediaQuery } from 'react-responsive'
 export const VideoItem = ({ participant }) => {
   const videoRef = useRef(null);
-  const { setSharedScreenUserId, sharedScreenUserId } = useCallState();
+  const { setSharedScreenUserId } = useCallState();
   const pcScreen = useMediaQuery({minWidth:"900px"})
 // console.log(pcScreen);
 
@@ -21,6 +21,7 @@ export const VideoItem = ({ participant }) => {
       setSharedScreenUserId("");
       return;
     }
+    // eslint-disable-next-line
   }, [participant]);
 
   return (
@@ -57,10 +58,10 @@ const Video = ({ participants }) => {
   );
 };
 
-const Container = styled.div`
-  margin: 48px 0 0;
-  visibility: ${(props) => (props.hidden ? "hidden" : "visible")};
-  height: ${(props) => (props.hidden ? "0" : "300px")};
-  width: ${(props) => (props.hidden ? "0" : "300px")};
-`;
+// const Container = styled.div`
+//   margin: 48px 0 0;
+//   visibility: ${(props) => (props.hidden ? "hidden" : "visible")};
+//   height: ${(props) => (props.hidden ? "0" : "300px")};
+//   width: ${(props) => (props.hidden ? "0" : "300px")};
+// `;
 export default Video;
