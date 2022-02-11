@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import {useEffect} from 'react';
+// import {useEffect} from 'react';
 import InCall from "./components/InCall";
 import CreateRoom from "./components/CreateRoom";
 import JoinRoom from "./components/JoinRoom";
@@ -16,7 +16,7 @@ export const SPEAKER = "SPK";
 export const LISTENER = "LST";
 
 const AppContent = () => {
-  const { view, setView, createRoomCall } = useCallState();
+  const { view, setView } = useCallState();
   let search = window.location.search;
   let params = new URLSearchParams(search);
   let joinRoomId = params.get("roomId");
